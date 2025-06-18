@@ -1,72 +1,14 @@
 <script setup lang="ts">
-import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
+  import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
+
+  import Navbar from '@/components/header/Navbar.vue'
+  import Hero from '@/components/header/Hero.vue';
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-40">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-          <!-- Logo -->
-          <div class="flex flex-row items-center">
-            <Hamburger color="black" :size="32" />
-            <h1 class="text-2xl font-bold text-red-600">VueMyBurger</h1>
-          </div>
-
-          <!-- Navigation -->
-          <nav class="hidden md:flex space-x-8">
-            <a href="#home" class="text-gray-900 hover:text-red-600 px-3 py-2 text-sm font-medium"
-              >Accueil</a
-            >
-            <a href="#menu" class="text-gray-900 hover:text-red-600 px-3 py-2 text-sm font-medium"
-              >Menu</a
-            >
-            <a href="#about" class="text-gray-900 hover:text-red-600 px-3 py-2 text-sm font-medium"
-              >À propos</a
-            >
-            <a
-              href="#contact"
-              class="text-gray-900 hover:text-red-600 px-3 py-2 text-sm font-medium"
-              >Contact</a
-            >
-          </nav>
-
-          <!-- Panier -->
-          <button
-            class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
-          >
-            <span class="sr-only">Voir le panier</span>
-            <ShoppingCart color="black" :size="32" />
-            <span
-              class="absolute -top-1 -right-1 h-5 w-5 bg-red-600 text-white text-xs rounded-full flex items-center justify-center"
-            >
-              0
-            </span>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="bg-gradient-to-r from-red-600 to-red-800 text-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-        <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
-            Compile ton burger, savoure le résultat.
-          </h1>
-          <p class="text-xl md:text-2xl mb-8 text-red-100">
-            Vue.js côté front, sauce maison côté food.
-          </p>
-          <a
-            href="#menu"
-            class="inline-block bg-white text-red-600 font-bold py-3 px-8 rounded-full hover:bg-gray-100 transition duration-300"
-          >
-            Voir le Menu
-          </a>
-        </div>
-      </div>
-    </section>
+    <Navbar />
+    <Hero />
 
     <!-- Menu Section -->
     <section id="menu" class="py-16">
