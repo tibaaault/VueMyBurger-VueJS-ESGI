@@ -12,7 +12,9 @@
     const cart = useCartStore()
     const user = useUserStore()
 
-    const cartCount = 0
+    const cartCount = computed(() => {
+        return cart.cartItems.reduce((total, item) => total + item.quantity, 0)
+    })
 
     const showLoginModal = ref(false)
     const showCartModal = ref(false)
