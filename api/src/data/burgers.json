@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Classic Burger",
+    "description": "Le burger incontournable avec steak de bœuf, salade iceberg, tomate fraîche, cornichons et sauce burger maison",
+    "price": 12.9,
+    "img": "/burger.png",
+    "ingredients": [
+      "steak de bœuf",
+      "salade iceberg",
+      "tomate",
+      "cornichons",
+      "sauce burger"
+    ],
+    "category": "classic"
+  },
+  {
+    "id": 2,
+    "name": "Cheese Deluxe",
+    "description": "Double portion de fromage cheddar fondu, steak juteux, oignons caramélisés et sauce fromagère",
+    "price": 14.5,
+    "img": "/burger.png",
+    "ingredients": [
+      "steak de bœuf",
+      "double cheddar",
+      "oignons caramélisés",
+      "sauce fromagère"
+    ],
+    "category": "cheese"
+  },
+  {
+    "id": 3,
+    "name": "Bacon BBQ",
+    "description": "Bacon croustillant, steak grillé, sauce BBQ fumée, oignons frits et salade croquante",
+    "price": 15.9,
+    "img": "/burger.png",
+    "ingredients": [
+      "steak de bœuf",
+      "bacon",
+      "sauce BBQ",
+      "oignons frits",
+      "salade"
+    ],
+    "category": "premium"
+  },
+  {
+    "id": 4,
+    "name": "Veggie Garden",
+    "description": "Steak végétarien aux légumes et quinoa, avocat, tomate, concombre, pousses et sauce verte",
+    "price": 13.9,
+    "img": "/burger.png",
+    "ingredients": [
+      "steak végétarien",
+      "avocat",
+      "tomate",
+      "concombre",
+      "pousses",
+      "sauce verte"
+    ],
+    "category": "vegetarian"
+  },
+  {
+    "id": 5,
+    "name": "Spicy Fire",
+    "description": "Steak épicé, jalapeños, fromage pepper jack, sauce piquante maison et oignons rouges",
+    "price": 16.5,
+    "img": "/burger.png",
+    "ingredients": [
+      "steak épicé",
+      "jalapeños",
+      "pepper jack",
+      "sauce piquante",
+      "oignons rouges"
+    ],
+    "category": "spicy"
+  },
+  {
+    "id": 6,
+    "name": "Gourmet Truffe",
+    "description": "Steak premium, fromage de chèvre, champignons sautés, roquette et sauce à la truffe",
+    "price": 19.9,
+    "img": "/burger.png",
+    "ingredients": [
+      "steak premium",
+      "chèvre",
+      "champignons",
+      "roquette",
+      "sauce truffe"
+    ],
+    "category": "gourmet"
+  }
+]
