@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
+</script>
 
 <template>
   <div class="min-h-screen bg-gray-50">
@@ -7,8 +9,9 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
           <!-- Logo -->
-          <div class="flex items-center">
-            <h1 class="text-2xl font-bold text-red-600">🍔 MyBurger</h1>
+          <div class="flex flex-row items-center">
+            <Hamburger color="black" :size="32" />
+            <h1 class="text-2xl font-bold text-red-600"> VueMyBurger</h1>
           </div>
 
           <!-- Navigation -->
@@ -34,14 +37,7 @@
             class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             <span class="sr-only">Voir le panier</span>
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h6a2 2 0 002-2v-8m-8 0V9a2 2 0 012-2h4a2 2 0 012 2v4.01"
-              />
-            </svg>
+            <ShoppingCart color="black" :size="32" /> 
             <span
               class="absolute -top-1 -right-1 h-5 w-5 bg-red-600 text-white text-xs rounded-full flex items-center justify-center"
             >
@@ -56,9 +52,9 @@
     <section id="home" class="bg-gradient-to-r from-red-600 to-red-800 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Les Meilleurs Burgers</h1>
+          <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Compile ton burger, savoure le résultat.</h1>
           <p class="text-xl md:text-2xl mb-8 text-red-100">
-            Faits maison avec amour et des ingrédients frais
+            Vue.js côté front, sauce maison côté food.
           </p>
           <a
             href="#menu"
@@ -75,7 +71,7 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Notre Menu</h2>
-          <p class="text-lg text-gray-600">Découvrez nos délicieux burgers artisanaux</p>
+          <p class="text-lg text-gray-600">Tu cliques, on cuisine.<br>On ne déploie que du bon.</p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -83,7 +79,11 @@
           <div
             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
           >
-            <img src="/burger.png" alt="Classic Burger" class="w-full h-48 object-cover" />
+            <img
+              src="../../public/logoVue.png"
+              alt="Classic Burger"
+              class="w-full h-48 object-cover"
+            />
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-900 mb-2">Classic Burger</h3>
               <p class="text-gray-600 mb-4">
@@ -104,7 +104,11 @@
           <div
             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
           >
-            <img src="/burger.png" alt="Cheese Burger" class="w-full h-48 object-cover" />
+            <img
+              src="../../public/logoVue.png"
+              alt="Cheese Burger"
+              class="w-full h-48 object-cover"
+            />
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-900 mb-2">Cheese Burger</h3>
               <p class="text-gray-600 mb-4">Burger avec fromage fondu, steak, salade, oignons</p>
@@ -123,7 +127,11 @@
           <div
             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
           >
-            <img src="/burger.png" alt="Bacon Burger" class="w-full h-48 object-cover" />
+            <img
+              src="../../public/logoVue.png"
+              alt="Bacon Burger"
+              class="w-full h-48 object-cover"
+            />
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-900 mb-2">Bacon Burger</h3>
               <p class="text-gray-600 mb-4">
@@ -144,7 +152,11 @@
           <div
             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
           >
-            <img src="/burger.png" alt="Deluxe Burger" class="w-full h-48 object-cover" />
+            <img
+              src="../../public/logoVue.png"
+              alt="Deluxe Burger"
+              class="w-full h-48 object-cover"
+            />
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-900 mb-2">Deluxe Burger</h3>
               <p class="text-gray-600 mb-4">
@@ -165,7 +177,11 @@
           <div
             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
           >
-            <img src="/burger.png" alt="Veggie Burger" class="w-full h-48 object-cover" />
+            <img
+              src="../../public/logoVue.png"
+              alt="Veggie Burger"
+              class="w-full h-48 object-cover"
+            />
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-900 mb-2">Veggie Burger</h3>
               <p class="text-gray-600 mb-4">Steak végétarien, salade, tomate, avocat, sauce végé</p>
@@ -184,7 +200,11 @@
           <div
             class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300"
           >
-            <img src="/burger.png" alt="Spicy Burger" class="w-full h-48 object-cover" />
+            <img
+              src="../../public/logoVue.png"
+              alt="Spicy Burger"
+              class="w-full h-48 object-cover"
+            />
             <div class="p-6">
               <h3 class="text-xl font-bold text-gray-900 mb-2">Spicy Burger</h3>
               <p class="text-gray-600 mb-4">Burger épicé avec jalapeños, fromage, sauce piquante</p>
@@ -209,9 +229,8 @@
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">À Propos de MyBurger</h2>
           <div class="max-w-3xl mx-auto">
             <p class="text-lg text-gray-600 mb-6">
-              Depuis 2020, MyBurger vous propose les meilleurs burgers artisanaux de la ville. Nous
-              utilisons uniquement des ingrédients frais et locaux pour vous offrir une expérience
-              culinaire unique.
+              Designé pour être mangé. Codé pour être aimé.<br>
+              Notre stack : pain bio, viande éthique, sauce maison.
             </p>
             <p class="text-lg text-gray-600">
               Notre équipe de chefs passionnés prépare chaque burger avec soin pour vous garantir
@@ -332,7 +351,11 @@
             <div class="hidden">
               <div class="flex items-center justify-between py-4 border-b">
                 <div class="flex items-center">
-                  <img src="/burger.png" alt="Burger" class="w-12 h-12 object-cover rounded" />
+                  <img
+                    src="../../public/logoVue.png"
+                    alt="Burger"
+                    class="w-12 h-12 object-cover rounded"
+                  />
                   <div class="ml-3">
                     <h3 class="text-sm font-medium">Classic Burger</h3>
                     <p class="text-sm text-gray-500">8.99€</p>
