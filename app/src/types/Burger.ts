@@ -3,14 +3,9 @@ export interface Burger {
   name: string
   description: string
   price: number
-  img?: string // Changé de 'image' à 'img' pour correspondre au JSON
+  img?: string 
   ingredients: string[]
-  category: 'classic' | 'cheese' | 'premium' | 'vegetarian' | 'spicy' | 'gourmet'
-}
-
-// Type pour le panier
-export interface CartItem extends Burger {
-  quantity: number
+  // category: 'classic' | 'cheese' | 'premium' | 'vegetarian' | 'spicy' | 'gourmet'
 }
 
 // Type pour les filtres côté client

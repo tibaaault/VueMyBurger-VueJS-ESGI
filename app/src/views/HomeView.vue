@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { Camera, Hamburger, ShoppingCart, User } from 'lucide-vue-next'
-
+import About from '@/components/main/About.vue';
+import Contact from '@/components/main/Contact.vue';
   import Navbar from '@/components/header/Navbar.vue'
   import Hero from '@/components/header/Hero.vue';
   import BurgerCard from '@/components/BurgerCard.vue';

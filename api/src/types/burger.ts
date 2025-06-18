@@ -5,13 +5,6 @@ export interface Burger {
   price: number;
   img?: string;
   ingredients: string[];
-  category:
-    | "classic"
-    | "cheese"
-    | "premium"
-    | "vegetarian"
-    | "spicy"
-    | "gourmet";
 }
 
 export interface CreateBurgerDto {
@@ -20,13 +13,13 @@ export interface CreateBurgerDto {
   price: number;
   img?: string;
   ingredients: string[];
-  category:
-    | "classic"
-    | "cheese"
-    | "premium"
-    | "vegetarian"
-    | "spicy"
-    | "gourmet";
+  // category:
+  //   | "classic"
+  //   | "cheese"
+  //   | "premium"
+  //   | "vegetarian"
+  //   | "spicy"
+  //   | "gourmet";
 }
 
 
