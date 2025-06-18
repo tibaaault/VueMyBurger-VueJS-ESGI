@@ -1,9 +1,118 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+      <div class="top-0 left-0 right-0 p-16 bg-custom-yellow h-screen-75 rounded-b-full">
+        <div class="flex justify-center">
+            <div class="font-bold uppercase mr-auto">
+                <a href="index.html" class="text-xl"><i class="fas fa-user-ninja mr-2"></i>Food <span
+                        class="text-red-700">Ninja</span></a>
+            </div>
+            <div class="font-bold">
+                <a href="#" class="py-2 px-5">Home</a>
+                <a href="#order" class="py-2 px-5">Order</a>
+                <a href="#contact" class="py-2 px-5">Contact</a>
+            </div>
+            <div class="ml-auto font-bold">
+                <a href="#" class="py-2 px-5">Login</a>
+                <a href="#" class="font-bold rounded-full bg-gray-100 py-2 px-5 ml-2">Sign Up</a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12">
+            <div class="lg:col-span-7 lg:ml-48 mt-12 lg:mt-32 text-center lg:text-left">
+                <span class="font-bold text-hero">
+                    Ninja food
+                </span>
+                <span class="font-bold text-6xl block ml-48 hidden xl:block">
+                    your choice
+                </span>
+            </div>
+            <div class="col-span-5 lg:mt-40 hidden md:block">
+                <img src="" class="h-64 mx-auto lg:mx-0">
+            </div>
+        </div>
+    </div>
+    <!--hero end-->
+    <!--main start-->
+    <div class="p-32" id="order">
+        <div class="font-bold text-center text-5xl">
+            What's the mood?
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-12 font-bold text-center items-center text-lg">
+            <a href="" class="my-3">
+                <div class="bg-custom-yellow rounded-full py-6 w-4/5 md:w-1/3 mx-auto">
+                    <span class="bg-white p-4 rounded-full text-center"><i class="fas fa-carrot"></i></span>
+                    <span class="block mt-5">Salad</span>
+                </div>
+            </a>
+            <a href="" class="my-3">
+                <div class="bg-custom-yellow rounded-full py-6 w-4/5 md:w-1/3 mx-auto">
+                    <span class="bg-white p-4 rounded-full"><i class="fas fa-hamburger"></i></span>
+                    <span class="block mt-5">Burger</span>
+                </div>
+            </a>
+            <a href="" class="my-3">
+                <div class="bg-custom-yellow rounded-full py-6 w-4/5 md:w-1/3 mx-auto">
+                    <span class="bg-white p-4 rounded-full"><i class="fas fa-pizza-slice"></i></span>
+                    <span class="block mt-5">Pizza</span>
+                </div>
+            </a>
+            <a href="" class="my-3">
+                <div class="bg-custom-yellow rounded-full py-6 w-4/5 md:w-1/3 mx-auto">
+                    <span class="bg-white p-4 rounded-full"><i class="fas fa-cocktail"></i></span>
+                    <span class="block mt-5">Drinks</span>
+                </div>
+            </a>
+            <a href="" class="my-3">
+                <div class="bg-custom-yellow rounded-full py-6 w-4/5 md:w-1/3 mx-auto">
+                    <span class="bg-white p-4 rounded-full"><i class="fas fa-ice-cream"></i></span>
+                    <span class="block mt-5">Dessert</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <!--main end-->
+    <!--contact start-->
+    <div class="bottom-0 left-0 right-0 bg-custom-yellow py-20 text-center" id="contact">
+        <span class="mt-12 font-bold text-5xl">Drop us a line</span>
+        <form class="mt-10 w-1/2 mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <input type="text" class="rounded-lg bg-gray-200 p-2" placeholder="name">
+                <input type="text" class="rounded-lg bg-gray-200 p-2" placeholder="email">
+            </div>
+            <div class="mt-10">
+                <textarea class="rounded-lg bg-gray-200 p-2 w-full h-screen-25" placeholder="message"></textarea>
+            </div>
+            <div class="mt-6">
+                <button type="submit"
+                    class="text-white text-xl hover:shadow-lg rounded-lg bg-gray-800 px-5 py-2">Send</button>
+            </div>
+        </form>
+        <hr class="mt-20 bg-gray-200 w-2/3 mx-auto">
+        <div class="flex justify-center w-2/3 mx-auto">
+            <div class="font-bold mt-10 mr-auto">
+                <span class="mx-5">
+                    <a href="shortcodes.html">
+                        Shrotcodes
+                    </a>
+                </span>
+                <span class="mx-5">
+                    <a href="documentation.html">
+                        Documentation
+                    </a>
+                </span>
+                <span class="mx-5">
+                    <a href="https://github.com/panbak" target="_blank">
+                        Author
+                    </a>
+                </span>
+            </div>
+            <div class="font-bold mt-10 ml-auto">
+                &copy; Panos Bakas
+            </div>
+        </div>
+    </div>
   </main>
 </template>
