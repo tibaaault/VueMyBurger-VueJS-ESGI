@@ -1,6 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import authRoutes from './routes/auth';
 import burgersRoutes from './routes/burgers';
 
 const app = express();
@@ -9,7 +8,6 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use('/auth', authRoutes);
 app.use('/api/burgers', burgersRoutes);
 
 app.listen(port, () => {
