@@ -52,7 +52,7 @@
           </button>
 
           <button v-if="userStore.userName" @click="disconnectUser" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
-            Se déconnecter
+            Déconnexion ({{ userStore.userName }})
           </button>
 
           <button v-else @click="showLoginModal = true" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
