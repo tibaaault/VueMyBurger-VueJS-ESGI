@@ -11,7 +11,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
         return;
     }
 
-    let users: User[] = []; // This should be replaced with actual data retrieval logic
+    let users: User[] = [];
 
     try {
         const data = fs.readFileSync('data/users.json', 'utf8');
@@ -31,7 +31,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser: User = {
-        id: users.length + 1, // Simple ID generation, should be replaced with a better approach
+        id: users.length + 1,
         firstName,
         lastName,
         email,
@@ -51,7 +51,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         return;
     }
 
-    let users: User[] = []; // This should be replaced with actual data retrieval logic
+    let users: User[] = [];
 
     try {
         const data = fs.readFileSync('data/users.json', 'utf8');
