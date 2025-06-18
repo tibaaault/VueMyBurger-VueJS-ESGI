@@ -16,9 +16,9 @@
     <div class="text-gray-500">Votre panier est vide.</div>
 
     <div class="mt-6 flex justify-center items-center">
-      <RouterLink to="/order" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+      <Button @click="close"  class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
         Commander
-      </RouterLink>
+      </Button>
     </div>
   </BaseModal>
 </template>

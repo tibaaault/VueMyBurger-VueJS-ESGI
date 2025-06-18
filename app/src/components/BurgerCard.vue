@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import type { Burger } from '@/types/Burger';
+import { ref } from 'vue';
 
 defineProps<Burger>()
+
+const count = ref(0)
+function increment() {
+  count.value++
+}
 </script>
 
 <template>
@@ -16,9 +22,8 @@ defineProps<Burger>()
       <p class="text-gray-600 mb-4 flex-grow">{{ description }}</p>
       <div class="flex justify-between items-center mt-auto">
         <span class="text-2xl font-bold text-red-600">{{ price.toFixed(2) }}€</span>
-        <button
-          class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
-        >
+
+        <button class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
           Ajouter au panier
         </button>
       </div>
