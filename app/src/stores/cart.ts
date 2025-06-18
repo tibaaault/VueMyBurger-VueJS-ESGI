@@ -35,6 +35,10 @@ export const useCartStore = defineStore('cart', {
         updateTotals() {
             this.totalPrice = this.items.reduce((sum, item) => sum + item.burger.price * item.quantity, 0)
             this.totalQuantity = this.items.reduce((sum, item) => sum + item.quantity, 0)
+        },
+
+        countItems() {
+            return this.items.reduce((count, item) => count + item.quantity, 0)
         }
     }
 })

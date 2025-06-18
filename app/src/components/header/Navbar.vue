@@ -9,15 +9,18 @@
     import LoginModal from '@/components/modals/LoginModal.vue'
     import CartModal from '@/components/modals/CartModal.vue'
 
-    const cart = useCartStore()
-    const user = useUserStore()
+    const cartStore = useCartStore()
+    const userStore = useUserStore()
 
-    const cartCount = computed(() => {
-        return cart.cartItems.reduce((total, item) => total + item.quantity, 0)
-    })
+    const cartCount = cartStore.countItems()
 
     const showLoginModal = ref(false)
     const showCartModal = ref(false)
+
+    const disconnectUser = () => {
+        userStore.clearUsername()
+        showCartModal.value = false
+    }
 </script>
 
 <template>
@@ -40,7 +43,7 @@
 
         <!-- Panier OU Modal de "connexion" -->
         <div class="flex items-center gap-4">
-          <button v-if="user.userName" @click="showCartModal = true" class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500">
+          <button v-if="userStore.userName" @click="showCartModal = true" class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500">
             <span class="sr-only">Voir le panier</span>
             <ShoppingCart color="black" :size="32" />
             <span class="absolute -top-1 -right-1 h-5 w-5 bg-red-600 text-white text-xs rounded-full flex items-center justify-center">
@@ -48,7 +51,7 @@
             </span>
           </button>
 
-          <button v-if="user.userName" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+          <button v-if="userStore.userName" @click="disconnectUser" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
             Se déconnecter
           </button>
 
