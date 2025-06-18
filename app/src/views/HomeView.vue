@@ -11,7 +11,7 @@ import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
           <!-- Logo -->
           <div class="flex flex-row items-center">
             <Hamburger color="black" :size="32" />
-            <h1 class="text-2xl font-bold text-red-600"> VueMyBurger</h1>
+            <h1 class="text-2xl font-bold text-red-600">VueMyBurger</h1>
           </div>
 
           <!-- Navigation -->
@@ -37,7 +37,7 @@ import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
             class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             <span class="sr-only">Voir le panier</span>
-            <ShoppingCart color="black" :size="32" /> 
+            <ShoppingCart color="black" :size="32" />
             <span
               class="absolute -top-1 -right-1 h-5 w-5 bg-red-600 text-white text-xs rounded-full flex items-center justify-center"
             >
@@ -52,7 +52,9 @@ import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
     <section id="home" class="bg-gradient-to-r from-red-600 to-red-800 text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <div class="text-center">
-          <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Compile ton burger, savoure le résultat.</h1>
+          <h1 class="text-4xl md:text-6xl font-extrabold mb-4">
+            Compile ton burger, savoure le résultat.
+          </h1>
           <p class="text-xl md:text-2xl mb-8 text-red-100">
             Vue.js côté front, sauce maison côté food.
           </p>
@@ -71,7 +73,9 @@ import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Notre Menu</h2>
-          <p class="text-lg text-gray-600">Tu cliques, on cuisine.<br>On ne déploie que du bon.</p>
+          <p class="text-lg text-gray-600">
+            Tu cliques, on cuisine.<br />On ne déploie que du bon.
+          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -229,7 +233,7 @@ import { Camera, Hamburger, ShoppingCart } from 'lucide-vue-next'
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">À Propos de MyBurger</h2>
           <div class="max-w-3xl mx-auto">
             <p class="text-lg text-gray-600 mb-6">
-              Designé pour être mangé. Codé pour être aimé.<br>
+              Designé pour être mangé. Codé pour être aimé.<br />
               Notre stack : pain bio, viande éthique, sauce maison.
             </p>
             <p class="text-lg text-gray-600">
