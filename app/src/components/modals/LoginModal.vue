@@ -41,9 +41,9 @@
                 password: password.value
             })
 
-            console.log('Login successful:', response.data.token)
             userStore.setUser(response.data.user)
-
+            userStore.setToken(response.data.token)
+            
             emit('update:open', false)
         } catch (err: any) {
             error.value = err?.response?.data?.message || "Une erreur est survenue."
