@@ -1,10 +1,12 @@
-import type { Burger } from './Burger';
+import type { Burger } from './Burger'
+
+export interface CartItem {
+  burger: Burger
+  quantity: number
+}
 
 export interface Cart {
-  items: {
-    burger: Burger;
-    quantity: number;
-  }[];
-  totalPrice: number;
-  totalQuantity: number;
+  items: CartItem[]
+  totalPrice: number
+  totalQuantity: number
 }

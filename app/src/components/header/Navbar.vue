@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Hamburger, ShoppingCart } from 'lucide-vue-next'
+import { Hamburger, History, ShoppingCart } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
@@ -53,6 +53,10 @@ const disconnectUser = () => {
 
         <!-- Panier OU Modal de "connexion" -->
         <div class="flex items-center gap-4">
+        <button v-if="userStore.user?.username">
+          <History color="black" :size="32" />
+        </button>
+
           <button
             v-if="userStore.user?.username"
             @click="showCartModal = true"

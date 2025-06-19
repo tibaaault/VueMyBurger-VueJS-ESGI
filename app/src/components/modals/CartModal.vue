@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import BaseModal from './BaseModal.vue'
 import { useCartStore } from '@/stores/cart'
 import type { Burger } from '@/types/Burger'
-import { computed } from 'vue'
+import { computed, ref } from 'vue';
+import OrderModal from './OrderModal.vue'
 
 const cartStore = useCartStore()
 const cartItems = computed(() => cartStore.cartItems)
+
+const showOrderModal = ref(false)
 
 defineProps<{
   open: boolean
@@ -16,6 +18,14 @@ const removeFromCart = (id: number) => cartStore.removeItem(id)
 
 const emit = defineEmits(['update:open'])
 const close = () => emit('update:open', false)
+
+const openOrderModal = () => {
+  showOrderModal.value = true
+}
+
+const handleOrderCreated = (order: any) => {
+  close()
+}
 </script>
 
 <template>
@@ -76,7 +86,7 @@ const close = () => emit('update:open', false)
         </div>
         <div v-if="cartItems.length > 0" class="mt-6 flex justify-center items-center">
           <button
-            @click="close"
+            @click="openOrderModal"
             class="bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition duration-200 font-semibold"
           >
             Commander ({{ cartStore.totalQuantity }} article{{
@@ -87,4 +97,9 @@ const close = () => emit('update:open', false)
       </div>
     </div>
   </transition>
+  
+  <OrderModal 
+    v-model:open="showOrderModal" 
+    @order-created="handleOrderCreated"
+  />
 </template>
