@@ -41,6 +41,7 @@
                 password: password.value
             })
 
+            console.log('Login successful:', response.data.token)
             userStore.setUser(response.data.user)
 
             emit('update:open', false)
