@@ -1,14 +1,14 @@
 import { ref } from 'vue'
 import type { Burger } from '@/types/Burger'
 
-const API_BASE_URL = 'http://localhost:3000/api'
+const API_BASE_URL = 'http://localhost:3000/api/burgers'
 
 
 export class BurgerService {
   // Récupérer tous les burgers
   static async getAllBurgers(): Promise<Burger[]> {
     try {
-      const response = await fetch(`${API_BASE_URL}/burgers`)
+      const response = await fetch(`${API_BASE_URL}/all`)
 
       if (!response.ok) {
         throw new Error(`Erreur HTTP: ${response.status}`)
