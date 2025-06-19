@@ -32,7 +32,7 @@ const handleOrderCreated = (order: any) => {
   <transition name="fade">
     <div
       v-if="open"
-      class="fixed inset-y-0 right-0 z-50 w-[30%] flex items-center justify-center bg-black bg-opacity-50"
+      class="fixed inset-y-0 right-0 z-50 w-[100%] md:w-[30%] flex items-center justify-center bg-black bg-opacity-50"
     >
       <div class="bg-white shadow-lg max-w-md w-full h-full p-9 relative">
         <button @click="close" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600">
