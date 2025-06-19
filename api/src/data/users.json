@@ -10,5 +10,11 @@
     "username": "xd",
     "email": "a@a.fr",
     "password": "$2b$10$uyZF/fMwD1wCecwpyMs.XeatBm0C7uhlYUf2xfasoNzZaKnOr5A3W"
+  },
+  {
+    "id": 3,
+    "username": "thibault",
+    "email": "troelstrate2@myges.fr",
+    "password": "$2b$10$rn5fg4C/zX8sx01FtO3RoOnOhlo8b5eiEjEk9WJON1Aq2Khdenptm"
   }
 ]
