@@ -1,15 +1,11 @@
-import { Router } from "express";
-import {
-  createOrder,
-  getUserOrders,
-  getOrderById,
-} from "../controllers/orderController";
+import express from "express";
+import { createOrder, getUserOrders, getOrderById } from "../controllers/orderController";
+import { authenticateJWT } from "../middleware/auth";
 
-const router = Router();
+const router = express.Router();
 
-router.post("/", createOrder);
-
-router.get("/user/:userId", getUserOrders);
-router.get("/:orderId", getOrderById);
+router.post("/", authenticateJWT, createOrder);
+router.get("/user", authenticateJWT, getUserOrders);
+router.get("/:orderId", authenticateJWT, getOrderById);
 
 export default router;
