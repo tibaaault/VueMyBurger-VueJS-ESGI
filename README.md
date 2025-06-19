@@ -56,7 +56,15 @@ Feel free to send us feedback -> [file an issue](https://github.com/KoZeuh/VueMy
 
 ## Build Process
 
-- TODO
+**In the app folder:**
+
+- Run `npm install` or `yarn install` to install dependencies.
+- Run `npm run dev` or `yarn run dev` to start the user interface in development mode.
+  
+**In the api folder:**
+
+- Run `npm install` or `yarn install` to install dependencies.
+- Run `npm run dev` or `yarn run dev` to start the server in development mode.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
