@@ -18,6 +18,4 @@ logs
 .fleet
 .idea
 
-# Local env files
-.env
-!.env.example
+/src/generated/prisma
