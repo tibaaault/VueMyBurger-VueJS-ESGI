@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia'
 import type { Cart } from '@/types/Cart'
+import type { Burger } from '@/types/Burger'
 
 export const useCartStore = defineStore('cart', {
     state: (): Cart => ({
         items: [],
         totalPrice: 0,
-        totalQuantity: 0
+        totalQuantity: 0,
     }),
     
     getters: {
@@ -15,7 +16,7 @@ export const useCartStore = defineStore('cart', {
     },
     
     actions: {
-        addItem(item: { burger: { id: number; name: string; description: string; price: number; image: string; ingredients: string[] }, quantity: number }) {
+        addItem(item: { burger: Burger, quantity: number }) {
             const existingItem = this.items.find(i => i.burger.id === item.burger.id)
 
             if (existingItem) {
@@ -23,12 +24,12 @@ export const useCartStore = defineStore('cart', {
             } else {
                 this.items.push(item)
             }
-
             this.updateTotals()
         },
     
         removeItem(burgerId: number) {
-            this.items = this.items.filter((i: any) => i.burger.id !== burgerId)
+            this.items = this.items.filter((i: any) => i.burger.id !== burgerId) 
+            // A faire
             this.updateTotals()
         },
     
@@ -39,6 +40,10 @@ export const useCartStore = defineStore('cart', {
 
         countItems() {
             return this.items.reduce((count, item) => count + item.quantity, 0)
-        }
+        },
+
+        removeItems(){
+            this.items = []
+        },
     }
 })
