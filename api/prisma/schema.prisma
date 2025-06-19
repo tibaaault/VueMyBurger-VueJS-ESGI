@@ -9,6 +9,7 @@ datasource db {
 
 model User {
   id        Int      @id @default(autoincrement())
+  username  String   @unique
   email     String   @unique
   password  String
   orders    Order[]
@@ -17,10 +18,11 @@ model User {
 model Burger {
   id          Int   @id @default(autoincrement())
   name        String
-  description String
+  description String @db.Text
   price       Float
   imageUrl    String
   orders      OrderItem[]
+  ingredients String   @db.Text
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

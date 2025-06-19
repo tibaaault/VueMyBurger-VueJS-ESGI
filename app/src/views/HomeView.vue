@@ -26,7 +26,7 @@ import Contact from '@/components/main/Contact.vue';
 
     <!-- Menu Section -->
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <div id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Notre Menu</h2>
           <p class="text-lg text-gray-600">
