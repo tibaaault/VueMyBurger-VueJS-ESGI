@@ -12,16 +12,14 @@ const cartStore = useCartStore()
 const userStore = useUserStore()
 const showLoginModal = ref(false)
 
-
 const addToCart = () => {
-
   const cartItem = {
     burger: {
       id: props.id,
       name: props.name,
       description: props.description,
       price: props.price,
-      image: props.img || '/burger.png', // Attention: 'image' au lieu de 'img'
+      img: props.img || '/burger.png',
       ingredients: props.ingredients,
     },
     quantity: 1,
