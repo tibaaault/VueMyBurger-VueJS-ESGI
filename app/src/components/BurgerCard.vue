@@ -42,7 +42,7 @@ const addToCart = () => {
         <span class="text-2xl font-bold text-red-600">{{ price.toFixed(2) }}€</span>
 
         <button
-          v-if="userStore.userName"
+          v-if="userStore.user?.username"
           @click="addToCart"
           class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
         >

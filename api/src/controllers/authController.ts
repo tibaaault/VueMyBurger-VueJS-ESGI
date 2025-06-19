@@ -7,10 +7,10 @@ import path from 'path';
 const usersFilePath = path.join(__dirname, '../data/users.json');
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
-    const { userName, email, password } = req.body as User;
+    const { username, email, password } = req.body as User;
 
-    if (!userName || !email || !password) {
-        res.status(400).json({ message: 'All fields are required' });
+    if (!username || !email || !password) {
+        res.status(400).json({ message: 'Des champs semblent manquants !' });
         return;
     }
 
@@ -26,7 +26,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
     const existingUser = users.find(user => user.email === email);
 
     if (existingUser) {
-        res.status(400).json({ message: 'User already exists' });
+        res.status(400).json({ message: 'Cet email est déjà utilisé !' });
         return;
     }
 
@@ -35,21 +35,21 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
 
     const newUser: User = {
         id: users.length + 1,
-        userName,
+        username,
         email,
         password: hashedPassword
     };
 
     users.push(newUser);
     fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2), 'utf8');
-    res.status(201).json({ message: 'User registered successfully', user: newUser });
+    res.status(201).json({ message: 'Votre compte a été créé avec succès !', user: newUser });
 };
 
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
     const { email, password } = req.body as User;
 
     if (!email || !password) {
-        res.status(400).json({ message: 'Email and password are required' });
+        res.status(400).json({ message: 'Des champs semblent manquants !' });
         return;
     }
 
@@ -65,16 +65,16 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     const user = users.find(user => user.email === email);
 
     if (!user) {
-        res.status(401).json({ message: 'Invalid email or password' });
+        res.status(401).json({ message: 'Les informations d\'identification sont invalides' });
         return;
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
-        res.status(401).json({ message: 'Invalid email or password' });
+        res.status(401).json({ message: 'Les informations d\'identification sont invalides' });
         return;
     }
 
-    res.status(200).json({ message: 'Login successful', user });
+    res.status(200).json({ message: 'Connexion réussie !', user: { id: user.id, username: user.username, email: user.email } });
 };

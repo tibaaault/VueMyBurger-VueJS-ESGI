@@ -1,17 +1,23 @@
 import { defineStore } from 'pinia'
+import type { User } from '../types/User'
+
+function getUserFromStorage(): User | null {
+  const data = localStorage.getItem('user')
+  return data ? JSON.parse(data) : null
+}
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    userName: localStorage.getItem('userName') || '',
+    user: getUserFromStorage() as User | null,
   }),
   actions: {
-    setUsername(name: string) {
-      this.userName = name
-      localStorage.setItem('userName', name)
+    setUser(user: User) {
+      this.user = user
+      localStorage.setItem('user', JSON.stringify(user))
     },
-    clearUsername() {
-      this.userName = ''
-      localStorage.removeItem('userName')
+    clearUser() {
+      this.user = null
+      localStorage.removeItem('user')
     }
   }
 })

@@ -1,45 +1,88 @@
 <script setup lang="ts">
-  import { ref, watch } from 'vue'
+    import { ref } from 'vue'
+    import BaseModal from './BaseModal.vue'
+    import axios from 'axios'
+    import { useRouter } from 'vue-router'
+    import { useUserStore } from '@/stores/user'
 
-  import BaseModal from './BaseModal.vue'
-  import { useUserStore } from '@/stores/user'
+    defineProps<{ open: boolean }>()
+    const emit = defineEmits(['update:open'])
 
-  defineProps<{ open: boolean }>()
-  const emit = defineEmits(['update:open'])
+    const router = useRouter()
+    const userStore = useUserStore()
 
-  const userStore = useUserStore()
-  const name = ref(userStore.userName)
+    // Champs du formulaire
+    const email = ref('')
+    const password = ref('')
+    const error = ref<string | null>(null)
+    const loading = ref(false)
 
-  function submitName() {
-      const userNameTrim = name.value.trim()
-      if (userNameTrim) {
-          userStore.setUsername(userNameTrim)
-          emit('update:open', false)
-      }
-  }
+    const validateForm = () => {
+        if (!email.value || !email.value.includes('@')) {
+            error.value = 'Adresse email invalide.'
+            return false
+        }
+        if (!password.value) {
+            return false
+        }
+
+        error.value = null
+        return true
+    }
+
+    const handleLogin = async () => {
+        if (!validateForm()) return
+
+        loading.value = true
+
+        try {
+            const response = await axios.post('http://localhost:3000/api/auth/login', {
+                email: email.value,
+                password: password.value
+            })
+
+            userStore.setUser(response.data.user)
+
+            emit('update:open', false)
+        } catch (err: any) {
+            error.value = err?.response?.data?.message || "Une erreur est survenue."
+        } finally {
+            loading.value = false
+        }
+    }
 </script>
 
 <template>
-  <BaseModal :open="open" @update:open="emit('update:open', $event)">
-    <h2 class="text-xl font-semibold mb-4">Bienvenue !</h2>
-    <p class="mb-4 text-sm text-gray-600">Quel est votre pseudo ?</p>
-      <input
-        v-model="name"
-        type="text"
-        class="border rounded px-3 py-2 w-full mb-4"
-        placeholder="Entrez votre prénom"
-      />
+    <BaseModal :open="open" @update:open="emit('update:open', $event)">
+        <h2 class="text-xl font-semibold mb-4">Connexion</h2>
 
-      <div class="flex justify-center items-center">
-        <button
-          class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
-          @click="submitName"
-        >
-          Valider
-        </button>
-      </div>
-  </BaseModal>
+        <form @submit.prevent="handleLogin" class="space-y-4">
+            <input
+                v-model="email"
+                type="email"
+                placeholder="Adresse email"
+                class="w-full border rounded px-3 py-2"
+                required
+            />
+            <input
+                v-model="password"
+                type="password"
+                placeholder="Mot de passe"
+                class="w-full border rounded px-3 py-2"
+                required
+            />
+
+            <p v-if="error" class="text-red-600 text-sm">{{ error }}</p>
+
+            <div class="flex justify-center">
+                <button
+                    type="submit"
+                    :disabled="loading"
+                    class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
+                >
+                    {{ loading ? 'Connexion...' : 'Se connecter' }}
+                </button>
+            </div>
+        </form>
+    </BaseModal>
 </template>
-
-
-

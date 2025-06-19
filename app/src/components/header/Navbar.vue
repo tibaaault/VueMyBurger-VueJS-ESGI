@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router'
 import { useCartStore } from '@/stores/cart'
 import { useUserStore } from '@/stores/user'
 
+import RegisterModal from '@/components/modals/RegisterModal.vue'
 import LoginModal from '@/components/modals/LoginModal.vue'
 import CartModal from '@/components/modals/CartModal.vue'
 
@@ -15,12 +16,12 @@ const userStore = useUserStore()
 // Rendre le compteur réactif avec computed
 const cartCount = computed(() => cartStore.cartTotalQuantity)
 
+const showRegisterModal = ref(false)
 const showLoginModal = ref(false)
 const showCartModal = ref(false)
 
 const disconnectUser = () => {
-  userStore.clearUsername()
-  cartStore.removeItems()
+  userStore.clearUser()
   showCartModal.value = false
 }
 
@@ -53,7 +54,7 @@ const disconnectUser = () => {
         <!-- Panier OU Modal de "connexion" -->
         <div class="flex items-center gap-4">
           <button
-            v-if="userStore.userName"
+            v-if="userStore.user?.username"
             @click="showCartModal = true"
             class="relative p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
@@ -67,26 +68,35 @@ const disconnectUser = () => {
           </button>
 
           <button
-            v-if="userStore.userName"
+            v-if="userStore.user?.username"
             @click="disconnectUser"
             class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"
           >
-            Déconnexion ({{ userStore.userName }})
+            Déconnexion ({{ userStore.user?.username }})
           </button>
 
-          <button
-            v-else
-            @click="showLoginModal = true"
-            class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-          >
-            Se connecter
-          </button>
+          <div v-else>
+            <button
+              @click="showLoginModal = true"
+              class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+            >
+              Se connecter
+            </button>
+            <button
+              @click="showRegisterModal = true"
+              class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition mx-2"
+            >
+              S'inscrire
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Gestion de l'affichage du modal de connexion -->
     <LoginModal v-model:open="showLoginModal" />
+    <!-- Gestion de l'affichage du modal de connexion -->
+    <RegisterModal v-model:open="showRegisterModal" />
     <!-- Gestion de l'affichage du modal du panier -->
     <CartModal v-model:open="showCartModal" />
   </header>
