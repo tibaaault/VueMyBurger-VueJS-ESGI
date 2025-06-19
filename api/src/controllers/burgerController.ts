@@ -1,22 +1,14 @@
 import { Request, Response } from 'express';
-import { Burger } from '../types/burger';
+import { PrismaClient } from '@prisma/client';
 
-import fs from 'fs';
-import path from 'path';
-
-const burgersFilePath = path.join(__dirname, '../data/burgers.json');
-
-export const getBurgersFromFile = async (): Promise<Burger[]> => {
-    try {
-        const data = fs.readFileSync(burgersFilePath, 'utf8');
-        return JSON.parse(data) as Burger[];
-    } catch (error) {
-        console.error('Error reading burgers file:', error);
-        return [];
-    }
-}
+const prisma = new PrismaClient();
 
 export const getAllBurgers = async (req: Request, res: Response): Promise<void> => {
-    const burgers = await getBurgersFromFile();
-    res.status(200).json(burgers);
+    try {
+        const burgers = await prisma.burger.findMany();
+        res.status(200).json(burgers);
+    } catch (error) {
+        console.error('Error fetching burgers from database:', error);
+        res.status(500).json({ error: 'Erreur lors de la récupération des burgers' });
+    }
 }
