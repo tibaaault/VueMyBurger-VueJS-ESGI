@@ -1,3 +1,21 @@
+<script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goBack = () => {
+  if (window.history.length > 1) {
+    router.back()
+  } else {
+    router.push('/')
+  }
+}
+
+const refreshPage = () => {
+  window.location.reload()
+}
+</script>
+
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col justify-center items-center px-4">
     <!-- Animation burger qui tombe -->
@@ -5,7 +23,6 @@
       <div class="text-8xl">🍔</div>
     </div>
 
-    <!-- Message d'erreur -->
     <div class="text-center">
       <h1 class="text-6xl font-bold text-red-600 mb-4">404</h1>
       <h2 class="text-3xl font-semibold text-gray-800 mb-4">Oups ! Burger introuvable</h2>
@@ -27,23 +44,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
-
-const goBack = () => {
-  if (window.history.length > 1) {
-    router.back()
-  } else {
-    router.push('/')
-  }
-}
-
-const refreshPage = () => {
-  window.location.reload()
-}
-</script>
 
 <style scoped>
 @keyframes bounce {
