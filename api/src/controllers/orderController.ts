@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
-import { CreateOrderRequest } from "../types/order";
+import { OrderRequest } from "../types/OrderRequest";
 
 const prisma = new PrismaClient();
 
@@ -8,7 +8,7 @@ export const createOrder = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  const { userId, address, items } = req.body as CreateOrderRequest;
+  const { userId, address, items } = req.body as OrderRequest;
 
   try {
     const user = await prisma.user.findUnique({

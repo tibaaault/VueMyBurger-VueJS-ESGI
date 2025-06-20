@@ -1,8 +1,4 @@
-export interface OrderItem {
-  burgerId: number;
-  quantity: number;
-  unitPrice: number;
-}
+import { OrderItem } from "./orderItem";
 
 export interface Order {
   userId: number;
@@ -11,13 +7,4 @@ export interface Order {
   items: OrderItem[];
 }
 
-export interface CreateOrderRequest {
-  userId: number;
-  address: string;
-  items: {
-    burgerId?: number; 
-    burgerName: string; 
-    burgerPrice: number; 
-    quantity: number;
-  }[];
-}
+
