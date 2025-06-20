@@ -153,7 +153,7 @@ const closeModal = () => {
 
     <div v-else class="text-center py-8">
       <div class="text-green-600 text-6xl mb-4">✓</div>
-      <h2 class="text-2xl font-semibold text-green-600 mb-2">Commande confirmée !</h2>
+      <h2 class="text-2xl font-semibold text-green-600 mb-2">Commande confirmée ! Merci {{userStore.user?.username}}</h2>
       <p class="text-gray-600 mb-4">Votre commande a été enregistrée avec succès.</p>
       <p class="text-sm text-gray-500">Cette fenêtre va se fermer automatiquement...</p>
     </div>
