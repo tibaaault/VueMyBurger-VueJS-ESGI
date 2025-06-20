@@ -43,6 +43,7 @@ class OrderService {
     }
   }
 
+
   // converti les items du panier en format approprié
   cartItemsToOrderItems(
     cartItems: CartItem[],

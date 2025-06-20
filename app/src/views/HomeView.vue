@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import About from '@/components/main/About.vue'
-import Contact from '@/components/main/Contact.vue'
-import Menu from '@/components/main/Menu.vue'
-import CreateBurger from '@/components/main/CreateBurger.vue'
-import Navbar from '@/components/header/Navbar.vue'
-import Hero from '@/components/header/Hero.vue'
+  import About from '@/components/main/About.vue'
+  import Contact from '@/components/main/Contact.vue'
+  import Menu from '@/components/main/Menu.vue'
+  import CreateBurger from '@/components/main/CreateBurger.vue'
+  import Navbar from '@/components/header/Navbar.vue'
+  import Hero from '@/components/header/Hero.vue'
 
 </script>
 
