@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import BurgerCard from '@/components/BurgerCard.vue'
+  import BurgerCard from '@/components/burger/BurgerCard.vue'
   import { onMounted, ref } from 'vue'
   import { getAllBurgers } from '@/services/burgerService'
-  import type { Burger } from '@/types/Burger' // Make sure this path matches your project
+  import type { Burger } from '@/types/Burger' 
 
   const burgers = ref<Burger[]>([])
 

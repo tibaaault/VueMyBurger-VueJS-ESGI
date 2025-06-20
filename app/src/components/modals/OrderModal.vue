@@ -1,90 +1,90 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
-  import BaseModal from '../ui/BaseModal.vue'
-  import { useCartStore } from '@/stores/cart'
-  import { useUserStore } from '@/stores/user'
-  import { orderService } from '@/services/orderService'
+import { ref, computed } from 'vue'
+import BaseModal from '../ui/BaseModal.vue'
+import { useCartStore } from '@/stores/cart'
+import { useUserStore } from '@/stores/user'
+import { createOrder, cartItemsToOrderItems } from '@/services/orderService'
 
-  const props = defineProps<{
-    open: boolean
-  }>()
+const props = defineProps<{
+  open: boolean
+}>()
 
-  const emit = defineEmits(['update:open', 'order-created'])
+const emit = defineEmits(['update:open', 'order-created'])
 
-  const cartStore = useCartStore()
-  const userStore = useUserStore()
+const cartStore = useCartStore()
+const userStore = useUserStore()
 
-  const address = ref('')
-  const loading = ref(false)
-  const error = ref('')
-  const success = ref(false)
+const address = ref('')
+const loading = ref(false)
+const error = ref('')
+const success = ref(false)
 
-  const cartItems = computed(() => cartStore.cartItems)
-  const totalPrice = computed(() => cartStore.totalPrice)
+const cartItems = computed(() => cartStore.cartItems)
+const totalPrice = computed(() => cartStore.totalPrice)
 
-  const validateForm = (): boolean => {
-    error.value = ''
+const validateForm = (): boolean => {
+  error.value = ''
 
-    if (!address.value.trim()) {
-      error.value = 'Veuillez saisir une adresse de livraison'
-      return false
-    }
-
-    if (cartItems.value.length === 0) {
-      error.value = 'Votre panier est vide'
-      return false
-    }
-
-    if (!userStore.user?.id) {
-      error.value = 'Vous devez être connecté pour passer commande'
-      return false
-    }
-
-    return true
+  if (!address.value.trim()) {
+    error.value = 'Veuillez saisir une adresse de livraison'
+    return false
   }
 
-  const handleOrder = async () => {
-    if (!validateForm()) return
-
-    loading.value = true
-    error.value = ''
-
-    try {
-      const orderData = {
-        userId: userStore.user!.id,
-        address: address.value.trim(),
-        items: orderService.cartItemsToOrderItems(cartItems.value),
-      }
-
-      const response = await orderService.createOrder(orderData)
-
-      success.value = true
-
-      cartStore.removeItems()
-
-      emit('order-created', response.order)
-      setTimeout(() => {
-        emit('update:open', false)
-        resetForm()
-      }, 2000)
-    } catch (err: any) {
-      error.value = err?.message || 'Une erreur est survenue lors de la commande'
-    } finally {
-      loading.value = false
-    }
+  if (cartItems.value.length === 0) {
+    error.value = 'Votre panier est vide'
+    return false
   }
 
-  const resetForm = () => {
-    address.value = ''
-    error.value = ''
-    success.value = false
+  if (!userStore.user?.id) {
+    error.value = 'Vous devez être connecté pour passer commande'
+    return false
+  }
+
+  return true
+}
+
+const handleOrder = async () => {
+  if (!validateForm()) return
+
+  loading.value = true
+  error.value = ''
+
+  try {
+    const orderData = {
+      userId: userStore.user!.id,
+      address: address.value.trim(),
+      items: cartItemsToOrderItems(cartItems.value),
+    }
+
+    const response = await createOrder(orderData)
+
+    success.value = true
+
+    cartStore.removeItems()
+
+    emit('order-created', response.order)
+    setTimeout(() => {
+      emit('update:open', false)
+      resetForm()
+    }, 2000)
+  } catch (err: any) {
+    error.value = err?.message || 'Une erreur est survenue lors de la commande'
+  } finally {
     loading.value = false
   }
+}
 
-  const closeModal = () => {
-    emit('update:open', false)
-    resetForm()
-  }
+const resetForm = () => {
+  address.value = ''
+  error.value = ''
+  success.value = false
+  loading.value = false
+}
+
+const closeModal = () => {
+  emit('update:open', false)
+  resetForm()
+}
 </script>
 
 <template>
@@ -151,10 +151,9 @@
       </form>
     </div>
 
-
     <div v-else class="text-center py-8">
       <div class="text-green-600 text-6xl mb-4">✓</div>
-      <h2 class="text-2xl font-semibold text-green-600 mb-2">Commande confirmée !</h2>
+      <h2 class="text-2xl font-semibold text-green-600 mb-2">Commande confirmée ! Merci {{userStore.user?.username}}</h2>
       <p class="text-gray-600 mb-4">Votre commande a été enregistrée avec succès.</p>
       <p class="text-sm text-gray-500">Cette fenêtre va se fermer automatiquement...</p>
     </div>
