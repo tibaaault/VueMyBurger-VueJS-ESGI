@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue'
-  import BaseModal from './BaseModal.vue'
+  import BaseModal from '../ui/BaseModal.vue'
   import { useCartStore } from '@/stores/cart'
   import { useUserStore } from '@/stores/user'
   import { orderService } from '@/services/orderService'
