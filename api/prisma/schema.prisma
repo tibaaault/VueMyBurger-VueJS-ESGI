@@ -38,11 +38,12 @@ model Order {
 }
 
 model OrderItem {
-  id        Int  @id @default(autoincrement())
-  order     Order   @relation(fields: [orderId], references: [id])
-  orderId   Int
-  burger    Burger  @relation(fields: [burgerId], references: [id])
-  burgerId  Int
-  quantity  Int
-  unitPrice Float
+  id         Int     @id @default(autoincrement())
+  order      Order   @relation(fields: [orderId], references: [id])
+  orderId    Int
+  burger     Burger? @relation(fields: [burgerId], references: [id])
+  burgerId   Int?
+  burgerName String? // Pour les burgers créés manuellement
+  quantity   Int
+  unitPrice  Float
 }

@@ -1,8 +1,9 @@
-import { Burger } from './Burger';
+import type { Burger } from './Burger'
 
 export interface OrderItem {
   id: number
   quantity: number
   unitPrice: number
-  burger: Burger
+  burger?: Burger | null 
+  burgerName?: string 
 }

@@ -32,10 +32,10 @@ export const useCartStore = defineStore('cart', {
 
       if (existingItem) {
         if (existingItem.quantity > 1) {
-          // Si quantité > 1, on décrémente
+          // Si quantité > 1
           existingItem.quantity -= 1
         } else {
-          // Si quantité = 1, on supprime l'article
+          // Si quantité = 1
           this.items = this.items.filter((i) => i.burger.id !== burgerId)
         }
       }

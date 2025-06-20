@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
-import { orderService, type Order } from '@/services/orderService'
+import { orderService } from '@/services/orderService'
+import type { Order } from '@/types/Order'
 
 const props = defineProps<{
   open: boolean
@@ -141,12 +142,14 @@ const closeModal = () => {
                 >
                   <div class="flex items-center space-x-3">
                     <img
-                      :src="item.burger.imageUrl || '/burger.png'"
-                      :alt="item.burger.name"
+                      :src="item.burger?.img || '/burger.png'"
+                      :alt="item.burger?.name || item.burgerName || 'Burger personnalisé'"
                       class="w-12 h-12 rounded object-cover"
                     />
                     <div>
-                      <p class="font-medium">{{ item.burger.name }}</p>
+                      <p class="font-medium">
+                        {{ item.burger?.name || item.burgerName || 'Burger personnalisé' }}
+                      </p>
                       <p class="text-sm text-gray-600">
                         {{ item.unitPrice.toFixed(2) }}€ × {{ item.quantity }}
                       </p>

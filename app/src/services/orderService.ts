@@ -59,12 +59,20 @@ class OrderService {
     }
   }
 
-  // Méthode utilitaire pour convertir les items du panier en format pour la commande
-  cartItemsToOrderItems(cartItems: CartItem[]): { burgerId: number; quantity: number }[] {
-    return cartItems.map((item) => ({
-      burgerId: item.burger.id,
-      quantity: item.quantity,
-    }))
+  cartItemsToOrderItems(
+    cartItems: CartItem[],
+  ): { burgerId?: number; burgerName: string; burgerPrice: number; quantity: number }[] {
+    return cartItems.map((item) => {
+      // voir si c'est un burger créé manuellement
+      const isManualBurger = item.burger.id > 100000 
+
+      return {
+        burgerId: isManualBurger ? undefined : item.burger.id,
+        burgerName: item.burger.name,
+        burgerPrice: item.burger.price,
+        quantity: item.quantity,
+      }
+    })
   }
 }
 

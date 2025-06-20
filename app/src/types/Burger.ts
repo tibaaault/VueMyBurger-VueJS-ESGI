@@ -8,10 +8,3 @@ export interface Burger {
   // category: 'classic' | 'cheese' | 'premium' | 'vegetarian' | 'spicy' | 'gourmet'
 }
 
-// Type pour les filtres côté client
-export interface BurgerFilters {
-  category?: string
-  minPrice?: number
-  maxPrice?: number
-  searchTerm?: string
-}

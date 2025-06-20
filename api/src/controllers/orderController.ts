@@ -11,7 +11,6 @@ export const createOrder = async (
   const { userId, address, items } = req.body as CreateOrderRequest;
 
   try {
-    // Vérifier que l'utilisateur existe
     const user = await prisma.user.findUnique({
       where: { id: userId },
     });
@@ -21,19 +20,34 @@ export const createOrder = async (
       return;
     }
 
-    const burgerIds = items.map((item) => item.burgerId);
-    const burgers = await prisma.burger.findMany({
-      where: { id: { in: burgerIds } },
-    });
+    let totalPrice = 0;
 
-    if (burgers.length !== burgerIds.length) {
-      res.status(400).json({ error: "Un ou plusieurs burgers non trouvés" });
-      return;
+    const dbBurgerItems = items.filter(
+      (item) => item.burgerId != null && item.burgerId !== undefined
+    );
+    const manualBurgerItems = items.filter(
+      (item) => item.burgerId == null || item.burgerId === undefined
+    );
+
+    let burgers: any[] = [];
+
+    if (dbBurgerItems.length > 0) {
+      const burgerIds = dbBurgerItems.map((item) => item.burgerId!);
+      burgers = await prisma.burger.findMany({
+        where: { id: { in: burgerIds } },
+      });
+
+      if (burgers.length !== burgerIds.length) {
+        res.status(400).json({
+          error: "Un ou plusieurs burgers non trouvés en base de données",
+        });
+        return;
+      }
     }
 
-    // Calculer le prix total
-    let totalPrice = 0;
-    const orderItems = items.map((item) => {
+    const orderItems = [];
+
+    for (const item of dbBurgerItems) {
       const burger = burgers.find((b) => b.id === item.burgerId);
       if (!burger) {
         throw new Error(`Burger avec l'ID ${item.burgerId} non trouvé`);
@@ -41,18 +55,31 @@ export const createOrder = async (
       const unitPrice = burger.price;
       totalPrice += unitPrice * item.quantity;
 
-      return {
+      orderItems.push({
         burgerId: item.burgerId,
         quantity: item.quantity,
         unitPrice,
-      };
-    });
+      });
+    }
+
+    // Traiter les burgers créés manuellement
+    for (const item of manualBurgerItems) {
+      const unitPrice = item.burgerPrice;
+      totalPrice += unitPrice * item.quantity;
+
+      orderItems.push({
+        burgerId: null,
+        burgerName: item.burgerName,
+        quantity: item.quantity,
+        unitPrice,
+      });
+    }
     // creer
     const order = await prisma.order.create({
       data: {
         userId,
         address,
-        totalPrice: Math.round(totalPrice * 100) / 100, 
+        totalPrice: Math.round(totalPrice * 100) / 100,
         items: {
           create: orderItems,
         },

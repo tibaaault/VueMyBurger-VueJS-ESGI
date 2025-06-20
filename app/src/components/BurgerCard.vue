@@ -7,7 +7,6 @@ import { useUserStore } from '@/stores/user'
 
 const props = defineProps<Burger>()
 
-// Initialiser les stores
 const cartStore = useCartStore()
 const userStore = useUserStore()
 const showLoginModal = ref(false)
@@ -57,6 +56,5 @@ const addToCart = () => {
     </div>
   </div>
 
-  <!-- Gestion de l'affichage du modal de connexion -->
   <LoginModal v-model:open="showLoginModal" />
 </template>

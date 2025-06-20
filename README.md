@@ -67,6 +67,7 @@ Feel free to send us feedback -> [file an issue](https://github.com/KoZeuh/VueMy
 - Configure your `.ENV`.
 - Create database named `vue_my_burger` on your PhpMyAdmin.
 - Run `npx prisma migrate dev` to update your database. 
+- Add data in your databse from file `api > prisma > data > import_burger.sql`.
 - Run `npm run dev` or `yarn run dev` to start the server in development mode.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
