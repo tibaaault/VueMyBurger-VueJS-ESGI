@@ -64,6 +64,9 @@ Feel free to send us feedback -> [file an issue](https://github.com/KoZeuh/VueMy
 **In the api folder:**
 
 - Run `npm install` or `yarn install` to install dependencies.
+- Configure your `.ENV`.
+- Create database named `vue_my_burger` on your PhpMyAdmin.
+- Run `npx prisma migrate dev` to update your database. 
 - Run `npm run dev` or `yarn run dev` to start the server in development mode.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
