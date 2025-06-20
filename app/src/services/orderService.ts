@@ -1,15 +1,53 @@
 import type { CartItem } from '@/types/Cart'
-import type { CreateOrderRequest, Order } from '@/types/Order'
-import { getAuthHeaders } from '@/utils/auth'
 
-const BASE_URL = 'http://localhost:3000/api/orders'
+export interface CreateOrderRequest {
+  userId: number
+  address: string
+  items: {
+    burgerId: number
+    quantity: number
+  }[]
+}
 
-export class OrderService {
-  static async createOrder(orderData: CreateOrderRequest): Promise<{ message: string; order: Order }> {
+export interface OrderItem {
+  id: number
+  burgerId: number
+  quantity: number
+  unitPrice: number
+  burger: {
+    id: number
+    name: string
+    description: string
+    price: number
+    imageUrl: string
+    ingredients: string
+  }
+}
+
+export interface Order {
+  id: number
+  userId: number
+  address: string
+  totalPrice: number
+  createdAt: string
+  items: OrderItem[]
+  user?: {
+    id: number
+    username: string
+    email: string
+  }
+}
+
+class OrderService {
+  private baseUrl = 'http://localhost:3000/api/orders'
+
+  async createOrder(orderData: CreateOrderRequest): Promise<{ message: string; order: Order }> {
     try {
-      const response = await fetch(BASE_URL, {
+      const response = await fetch(this.baseUrl, {
         method: 'POST',
-        headers: getAuthHeaders(),
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(orderData),
       })
 
@@ -25,11 +63,9 @@ export class OrderService {
     }
   }
 
-  static async getUserOrders(userId: number): Promise<Order[]> {
+  async getUserOrders(userId: number): Promise<Order[]> {
     try {
-      const response = await fetch(`${BASE_URL}/user/${userId}`, {
-        headers: getAuthHeaders(),
-      })
+      const response = await fetch(`${this.baseUrl}/user/${userId}`)
 
       if (!response.ok) {
         const errorData = await response.json()
@@ -43,11 +79,9 @@ export class OrderService {
     }
   }
 
-  static async getOrderById(orderId: number): Promise<Order> {
+  async getOrderById(orderId: number): Promise<Order> {
     try {
-      const response = await fetch(`${BASE_URL}/${orderId}`, {
-        headers: getAuthHeaders(),
-      })
+      const response = await fetch(`${this.baseUrl}/${orderId}`)
 
       if (!response.ok) {
         const errorData = await response.json()
@@ -62,10 +96,12 @@ export class OrderService {
   }
 
   // Méthode utilitaire pour convertir les items du panier en format pour la commande
-  static cartItemsToOrderItems(cartItems: CartItem[]): { burgerId: number; quantity: number }[] {
+  cartItemsToOrderItems(cartItems: CartItem[]): { burgerId: number; quantity: number }[] {
     return cartItems.map((item) => ({
       burgerId: item.burger.id,
       quantity: item.quantity,
     }))
   }
 }
+
+export const orderService = new OrderService()

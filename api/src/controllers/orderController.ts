@@ -8,9 +8,7 @@ export const createOrder = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  // L'utilisateur authentifié est disponible via req.user (défini par le middleware JWT)
-  const userId = req.user.id; // <-- Utilise l'ID du token JWT
-  const { address, items } = req.body as Omit<CreateOrderRequest, "userId">;
+  const { userId, address, items } = req.body as CreateOrderRequest;
 
   try {
     // Vérifier que l'utilisateur existe
@@ -91,12 +89,11 @@ export const getUserOrders = async (
   req: Request,
   res: Response
 ): Promise<void> => {
-  // Utilise l'utilisateur authentifié
-  const userId = req.user.id;
+  const { userId } = req.params;
 
   try {
     const orders = await prisma.order.findMany({
-      where: { userId },
+      where: { userId: parseInt(userId) },
       include: {
         items: {
           include: {

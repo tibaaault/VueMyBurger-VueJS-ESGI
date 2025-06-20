@@ -2,7 +2,15 @@ import { Request, Response } from 'express';
 import { User } from '../types/user';
 import bcrypt from 'bcrypt';
 import prisma from '../prisma/client';
-import { generateToken } from '../utils/jwt';
+import jwt from 'jsonwebtoken';
+
+const generateToken = (username: string): string => {
+    if (!process.env.JWT_SECRET) {
+        throw new Error('JWT_SECRET is not defined in environment variables');
+    }
+
+    return jwt.sign(username, process.env.JWT_SECRET);
+}
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
     const { username, email, password } = req.body as User;
