@@ -66,18 +66,11 @@
 
   // ajouter un ingrédient + limiter à 10
   const addIngredient = (ingredient: Ingredient) => {
-    if (burgerIngredients.value.length >= maxIngredients) {
-      alert(`Vous ne pouvez pas ajouter plus de ${maxIngredients} ingrédients !`)
-      return
-    }
+
 
     if (burgerIngredients.value.length === 0 && ingredient.id !== 'bun-bottom') {
       const bottomBun = availableIngredients.find((i) => i.id === 'bun-bottom')
       if (bottomBun) {
-        if (burgerIngredients.value.length + 2 > maxIngredients) {
-          alert(`Vous ne pouvez pas ajouter plus de ${maxIngredients} ingrédients !`)
-          return
-        }
         burgerIngredients.value.push({ ...bottomBun })
       }
     }
@@ -139,11 +132,6 @@
   }
 
   const saveBurger = () => {
-    if (burgerIngredients.value.length === 0) {
-      alert('Votre burger doit contenir au moins un ingrédient !')
-      return
-    }
-
     // nom automatique
     let finalName = burgerName.value.trim()
     if (!finalName) {
