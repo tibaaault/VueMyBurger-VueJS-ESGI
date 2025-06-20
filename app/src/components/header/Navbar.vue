@@ -54,7 +54,7 @@ const openOrderHistory = () => {
         <button 
           v-if="userStore.user?.username"
           @click="openOrderHistory"
-          class="p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
+          class="md:p-2 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500"
           title="Historique des commandes"
         >
           <History color="black" :size="32" />
@@ -75,7 +75,7 @@ const openOrderHistory = () => {
           <button
             v-if="userStore.user?.username"
             @click="disconnectUser"
-            class="bg-red-600 text-white md:px-4 py-2 rounded hover:bg-red-700 transition"
+            class="bg-red-600 text-white text-xs md:text-md p-0.5 md:px-4 py-2 rounded hover:bg-red-700 transition"
           >
             Déconnexion ({{ userStore.user?.username }})
           </button>
