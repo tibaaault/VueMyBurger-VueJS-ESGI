@@ -12,12 +12,21 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
     }
 
     try {
-        const existingUser = await prisma.user.findUnique({
-            where: { email }
+        const existingUser = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    { email },
+                    { username }
+                ]
+            }
         });
 
         if (existingUser) {
-            res.status(400).json({ message: 'Cet email est déjà utilisé !' });
+            if (existingUser.email === email) {
+                res.status(400).json({ message: 'Cet email est déjà utilisé !' });
+            } else {
+                res.status(400).json({ message: 'Ce nom d\'utilisateur est déjà utilisé !' });
+            }
             return;
         }
 
