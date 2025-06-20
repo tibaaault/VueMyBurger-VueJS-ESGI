@@ -1,4 +1,4 @@
-import type { CartItem } from '@/types/Cart'
+import type { CartItem } from '@/types/CartItem'
 import type { Order } from '@/types/Order'
 import type { CreateOrderRequest } from '@/types/CreateOrderRequest'
 

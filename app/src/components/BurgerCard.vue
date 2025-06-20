@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import type { Burger } from '@/types/Burger'
-import { ref } from 'vue'
-import { useCartStore } from '@/stores/cart'
-import LoginModal from '@/components/modals/LoginModal.vue'
-import { useUserStore } from '@/stores/user'
+  import type { Burger } from '@/types/Burger'
+  import { ref } from 'vue'
+  import { useCartStore } from '@/stores/cart'
+  import LoginModal from '@/components/modals/LoginModal.vue'
+  import { useUserStore } from '@/stores/user'
 
-const props = defineProps<Burger>()
+  const props = defineProps<Burger>()
 
-const cartStore = useCartStore()
-const userStore = useUserStore()
-const showLoginModal = ref(false)
+  const cartStore = useCartStore()
+  const userStore = useUserStore()
+  const showLoginModal = ref(false)
 
-const addToCart = () => {
-  const cartItem = {
-    burger: {
-      id: props.id,
-      name: props.name,
-      description: props.description,
-      price: props.price,
-      img: props.img || '/burger.png',
-      ingredients: props.ingredients,
-    },
-    quantity: 1,
+  const addToCart = () => {
+    const cartItem = {
+      burger: {
+        id: props.id,
+        name: props.name,
+        description: props.description,
+        price: props.price,
+        img: props.img || '/burger.png',
+        ingredients: props.ingredients,
+      },
+      quantity: 1,
+    }
+    cartStore.addItem(cartItem)
   }
-  cartStore.addItem(cartItem)
-}
 </script>
 
 <template>

@@ -9,7 +9,6 @@
 
     const router = useRouter()
 
-    // Champs du formulaire
     const username = ref('')
     const email = ref('')
     const password = ref('')

@@ -5,7 +5,6 @@ const API_BASE_URL = 'http://localhost:3000/api/burgers'
 
 
 export class BurgerService {
-
   static async getAllBurgers(): Promise<Burger[]> {
     try {
       const response = await fetch(`${API_BASE_URL}/all`)
@@ -23,13 +22,11 @@ export class BurgerService {
   }
 }
 
-// Hook Vue.js pour utiliser le service des burgers
 export function useBurgers() {
   const burgers = ref<Burger[]>([])
   const loading = ref(false)
   const error = ref<string | null>(null)
 
-  // Charger tous les burgers
   const loadBurgers = async () => {
     loading.value = true
     error.value = null

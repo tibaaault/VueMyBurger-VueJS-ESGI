@@ -1,34 +1,34 @@
 <script setup lang="ts">
-import { useCartStore } from '@/stores/cart'
-import type { Burger } from '@/types/Burger'
-import { computed, ref } from 'vue'
-import OrderModal from './OrderModal.vue'
+  import { useCartStore } from '@/stores/cart'
+  import type { Burger } from '@/types/Burger'
+  import { computed, ref } from 'vue'
+  import OrderModal from './OrderModal.vue'
 
-const cartStore = useCartStore()
-const cartItems = computed(() => cartStore.cartItems)
+  const cartStore = useCartStore()
+  const cartItems = computed(() => cartStore.cartItems)
 
-const showOrderModal = ref(false)
+  const showOrderModal = ref(false)
 
-defineProps<{
-  open: boolean
-}>()
+  defineProps<{
+    open: boolean
+  }>()
 
-const addToCart = (burger: Burger) => cartStore.addItem({ burger: burger, quantity: 1 })
-const removeFromCart = (id: number) => cartStore.removeItem(id)
+  const addToCart = (burger: Burger) => cartStore.addItem({ burger: burger, quantity: 1 })
+  const removeFromCart = (id: number) => cartStore.removeItem(id)
 
-const emit = defineEmits(['update:open'])
-const close = () => emit('update:open', false)
+  const emit = defineEmits(['update:open'])
+  const close = () => emit('update:open', false)
 
-const openOrderModal = () => {
-  showOrderModal.value = true
-}
+  const openOrderModal = () => {
+    showOrderModal.value = true
+  }
 
-const handleOrderCreated = (order: any) => {
-  setTimeout(() => {
-    showOrderModal.value = false
-    close()
-  }, 2000)
-}
+  const handleOrderCreated = (order: any) => {
+    setTimeout(() => {
+      showOrderModal.value = false
+      close()
+    }, 2000)
+  }
 </script>
 
 <template>

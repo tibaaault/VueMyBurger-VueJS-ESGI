@@ -1,65 +1,65 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue'
-import { useUserStore } from '@/stores/user'
-import { orderService } from '@/services/orderService'
-import type { Order } from '@/types/Order'
+  import { ref, computed, watch } from 'vue'
+  import { useUserStore } from '@/stores/user'
+  import { orderService } from '@/services/orderService'
+  import type { Order } from '@/types/Order'
 
-const props = defineProps<{
-  open: boolean
-}>()
+  const props = defineProps<{
+    open: boolean
+  }>()
 
-const emit = defineEmits(['update:open'])
+  const emit = defineEmits(['update:open'])
 
-const userStore = useUserStore()
+  const userStore = useUserStore()
 
-const orders = ref<Order[]>([])
-const loading = ref(false)
-const error = ref('')
+  const orders = ref<Order[]>([])
+  const loading = ref(false)
+  const error = ref('')
 
-const formattedOrders = computed(() => {
-  return orders.value.map((order) => ({
-    ...order,
-    formattedDate: new Date(order.createdAt).toLocaleDateString('fr-FR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    }),
-  }))
-})
+  const formattedOrders = computed(() => {
+    return orders.value.map((order) => ({
+      ...order,
+      formattedDate: new Date(order.createdAt).toLocaleDateString('fr-FR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+    }))
+  })
 
-const fetchOrders = async () => {
-  if (!userStore.user?.id) {
-    error.value = 'Vous devez être connecté pour voir vos commandes'
-    return
-  }
-
-  loading.value = true
-  error.value = ''
-
-  try {
-    orders.value = await orderService.getUserOrders(userStore.user.id)
-  } catch (err: any) {
-    error.value = err?.message || 'Erreur lors du chargement des commandes'
-  } finally {
-    loading.value = false
-  }
-}
-watch(
-  () => props.open,
-  (newValue) => {
-    if (newValue) {
-      fetchOrders()
+  const fetchOrders = async () => {
+    if (!userStore.user?.id) {
+      error.value = 'Vous devez être connecté pour voir vos commandes'
+      return
     }
-  },
-)
 
-const closeModal = () => {
-  emit('update:open', false)
-  orders.value = []
-  error.value = ''
-}
+    loading.value = true
+    error.value = ''
+
+    try {
+      orders.value = await orderService.getUserOrders(userStore.user.id)
+    } catch (err: any) {
+      error.value = err?.message || 'Erreur lors du chargement des commandes'
+    } finally {
+      loading.value = false
+    }
+  }
+  watch(
+    () => props.open,
+    (newValue) => {
+      if (newValue) {
+        fetchOrders()
+      }
+    },
+  )
+
+  const closeModal = () => {
+    emit('update:open', false)
+    orders.value = []
+    error.value = ''
+  }
 </script>
 
 <template>

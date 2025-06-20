@@ -11,7 +11,6 @@
     const router = useRouter()
     const userStore = useUserStore()
 
-    // Champs du formulaire
     const email = ref('')
     const password = ref('')
     const error = ref<string | null>(null)

@@ -1,37 +1,35 @@
 <script setup lang="ts">
-import { Hamburger, History, ShoppingCart } from 'lucide-vue-next'
-import { computed, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+  import { Hamburger, History, ShoppingCart } from 'lucide-vue-next'
+  import { computed, ref } from 'vue'
+  import { RouterLink } from 'vue-router'
 
-import { useCartStore } from '@/stores/cart'
-import { useUserStore } from '@/stores/user'
+  import { useCartStore } from '@/stores/cart'
+  import { useUserStore } from '@/stores/user'
 
-import RegisterModal from '@/components/modals/RegisterModal.vue'
-import LoginModal from '@/components/modals/LoginModal.vue'
-import CartModal from '@/components/modals/CartModal.vue'
-import OrderHistoryModal from '@/components/modals/OrderHistoryModal.vue'
+  import RegisterModal from '@/components/modals/RegisterModal.vue'
+  import LoginModal from '@/components/modals/LoginModal.vue'
+  import CartModal from '@/components/modals/CartModal.vue'
+  import OrderHistoryModal from '@/components/modals/OrderHistoryModal.vue'
 
-const cartStore = useCartStore()
-const userStore = useUserStore()
-
-
-const cartCount = computed(() => cartStore.cartTotalQuantity)
-
-const showRegisterModal = ref(false)
-const showLoginModal = ref(false)
-const showCartModal = ref(false)
-const showOrderHistoryModal = ref(false)
-
-const disconnectUser = () => {
-  userStore.clearUser()
-  showCartModal.value = false
-}
-
-const openOrderHistory = () => {
-  showOrderHistoryModal.value = true
-}
+  const cartStore = useCartStore()
+  const userStore = useUserStore()
 
 
+  const cartCount = computed(() => cartStore.cartTotalQuantity)
+
+  const showRegisterModal = ref(false)
+  const showLoginModal = ref(false)
+  const showCartModal = ref(false)
+  const showOrderHistoryModal = ref(false)
+
+  const disconnectUser = () => {
+    userStore.clearUser()
+    showCartModal.value = false
+  }
+
+  const openOrderHistory = () => {
+    showOrderHistoryModal.value = true
+  }
 </script>
 
 <template>
