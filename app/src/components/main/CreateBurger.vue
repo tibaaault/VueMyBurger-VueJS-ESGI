@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import BurgerBuilder from '@/components/BurgerBuilder.vue'
+import BurgerBuilder from '@/components/burger/BurgerBuilder.vue'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import LoginModal from '@/components/modals/LoginModal.vue'
