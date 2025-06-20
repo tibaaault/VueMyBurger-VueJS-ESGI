@@ -1,4 +1,5 @@
-import { OrderItem } from "./OrderItem"
+import type { OrderItem } from "./OrderItem"
+import type { User } from "./User"
 
 export interface Order {
   id: number
@@ -7,9 +8,5 @@ export interface Order {
   totalPrice: number
   createdAt: string
   items: OrderItem[]
-  user?: {
-    id: number
-    username: string
-    email: string
-  }
+  user?: User
 }
