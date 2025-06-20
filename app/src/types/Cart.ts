@@ -1,9 +1,4 @@
-import type { Burger } from './Burger'
-
-export interface CartItem {
-  burger: Burger
-  quantity: number
-}
+import type { CartItem } from './CartItem'
 
 export interface Cart {
   items: CartItem[]
