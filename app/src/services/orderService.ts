@@ -43,22 +43,6 @@ class OrderService {
     }
   }
 
-  async getOrderById(orderId: number): Promise<Order> {
-    try {
-      const response = await fetch(`${API_BASE_URL}/${orderId}`)
-
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || 'Erreur lors de la récupération de la commande')
-      }
-
-      return await response.json()
-    } catch (error) {
-      console.error('Erreur lors de la récupération de la commande:', error)
-      throw error
-    }
-  }
-
   cartItemsToOrderItems(
     cartItems: CartItem[],
   ): { burgerId?: number; burgerName: string; burgerPrice: number; quantity: number }[] {

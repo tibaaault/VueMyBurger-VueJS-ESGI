@@ -36,24 +36,18 @@
 
     .typewriter-first {
         overflow: hidden;
-        border-right: 3px solid rgba(255, 255, 255, 0.8);
         white-space: nowrap;
         width: 0;
-        animation: 
-            typing-cycle-first 8s linear infinite,
-            blink-caret-first 1s step-end infinite;
+        animation: typing-cycle-first 8s linear infinite;
         margin: 0 auto;
         max-width: fit-content;
     }
 
     .typewriter-second {
         overflow: hidden;
-        border-right: 3px solid rgba(255, 255, 255, 0.8);
         white-space: nowrap;
         width: 0;
-        animation: 
-            typing-cycle-second 8s linear infinite,
-            blink-caret-second 1s step-end infinite;
+        animation: typing-cycle-second 8s linear infinite;
         margin: 0 auto;
         max-width: fit-content;
     }
@@ -93,38 +87,6 @@
         }
         100% {
             width: 0;
-        }
-    }
-
-    /* Curseur clignotant pour la première ligne */
-    @keyframes blink-caret-first {
-        0%, 25% {
-            border-color: rgba(255, 255, 255, 0.8);
-        }
-        25.1%, 62.4% {
-            border-color: transparent;
-        }
-        62.5%, 87.5% {
-            border-color: rgba(255, 255, 255, 0.8);
-        }
-        87.6%, 100% {
-            border-color: transparent;
-        }
-    }
-
-    /* Curseur clignotant pour la deuxième ligne */
-    @keyframes blink-caret-second {
-        0%, 25% {
-            border-color: transparent;
-        }
-        25.1%, 50% {
-            border-color: rgba(255, 255, 255, 0.8);
-        }
-        50.1%, 87.4% {
-            border-color: transparent;
-        }
-        87.5%, 100% {
-            border-color: rgba(255, 255, 255, 0.8);
         }
     }
 
