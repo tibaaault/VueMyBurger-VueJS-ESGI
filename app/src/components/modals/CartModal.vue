@@ -54,7 +54,7 @@
           <div class="flex flex-row">
             <img
               class="w-[35%] rounded"
-              :src="item.burger.img || '/burger.png'"
+              :src="item.burger.imageUrl || '/burger.png'"
               alt="Image du burger"
             />
             <div class="flex flex-col w-[70%] pl-4">

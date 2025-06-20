@@ -1,24 +1,23 @@
 <script setup lang="ts">
-  import type { Burger } from '@/types/Burger'
-  import { ref } from 'vue'
-  import { useCartStore } from '@/stores/cart'
-  import LoginModal from '@/components/modals/LoginModal.vue'
-  import { useUserStore } from '@/stores/user'
+import type { Burger } from '@/types/Burger'
+import { ref } from 'vue'
+import { useCartStore } from '@/stores/cart'
+import LoginModal from '@/components/modals/LoginModal.vue'
+import { useUserStore } from '@/stores/user'
 
-  const props = defineProps<Burger>()
+const props = defineProps<Burger>()
 
-  const cartStore = useCartStore()
-  const userStore = useUserStore()
-  const showLoginModal = ref(false)
-
-  const addToCart = () => {
+const cartStore = useCartStore()
+const userStore = useUserStore()
+const showLoginModal = ref(false)  
+const addToCart = () => {
     const cartItem = {
       burger: {
         id: props.id,
         name: props.name,
         description: props.description,
         price: props.price,
-        img: props.img || '/burger.png',
+        imageUrl: props.imageUrl || '/burger.png',
         ingredients: props.ingredients,
       },
       quantity: 1,
@@ -31,7 +30,7 @@
   <div
     class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300 flex flex-col h-full"
   >
-    <img :src="img || '/burger.png'" :alt="name" class="w-full h-48 object-cover" />
+    <img :src="imageUrl || '/burger.png'" :alt="name" class="w-full h-48 object-cover" />
     <div class="p-6 flex flex-col flex-grow">
       <h3 class="text-xl font-bold text-gray-900 mb-2">{{ name }}</h3>
       <p class="text-gray-600 mb-4 flex-grow">{{ description }}</p>

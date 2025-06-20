@@ -6,13 +6,6 @@ import CreateBurger from '@/components/main/CreateBurger.vue'
 import Navbar from '@/components/header/Navbar.vue'
 import Hero from '@/components/header/Hero.vue'
 
-
-
-
-
-
-
-
 </script>
 
 <template>

@@ -142,7 +142,7 @@
                 >
                   <div class="flex items-center space-x-3">
                     <img
-                      :src="item.burger?.img || '/burger.png'"
+                      :src="item.burger?.imageUrl || '/burger.png'"
                       :alt="item.burger?.name || item.burgerName || 'Burger personnalisé'"
                       class="w-12 h-12 rounded object-cover"
                     />

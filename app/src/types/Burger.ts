@@ -3,6 +3,6 @@ export interface Burger {
   name: string
   description: string
   price: number
-  img?: string
-  ingredients: string[] 
+  imageUrl?: string 
+  ingredients: string[]
 }
