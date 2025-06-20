@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-    VueJS and TypeScript initialization project. Built with VueJS, TailwindCSS & Express (back-end API).
+    VueJS and TypeScript initialization project. Built with VueJS, TailwindCSS,  Express (back-end API) and Prisma (ORM).
 </p>
 
 <p align="center">
