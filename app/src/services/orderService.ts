@@ -1,49 +1,13 @@
 import type { CartItem } from '@/types/Cart'
+import type { Order } from '@/types/Order'
+import type { CreateOrderRequest } from '@/types/CreateOrderRequest'
 
-export interface CreateOrderRequest {
-  userId: number
-  address: string
-  items: {
-    burgerId: number
-    quantity: number
-  }[]
-}
-
-export interface OrderItem {
-  id: number
-  burgerId: number
-  quantity: number
-  unitPrice: number
-  burger: {
-    id: number
-    name: string
-    description: string
-    price: number
-    imageUrl: string
-    ingredients: string
-  }
-}
-
-export interface Order {
-  id: number
-  userId: number
-  address: string
-  totalPrice: number
-  createdAt: string
-  items: OrderItem[]
-  user?: {
-    id: number
-    username: string
-    email: string
-  }
-}
+const API_BASE_URL = 'http://localhost:3000/api/orders'
 
 class OrderService {
-  private baseUrl = 'http://localhost:3000/api/orders'
-
   async createOrder(orderData: CreateOrderRequest): Promise<{ message: string; order: Order }> {
     try {
-      const response = await fetch(this.baseUrl, {
+      const response = await fetch(API_BASE_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +29,7 @@ class OrderService {
 
   async getUserOrders(userId: number): Promise<Order[]> {
     try {
-      const response = await fetch(`${this.baseUrl}/user/${userId}`)
+      const response = await fetch(`${API_BASE_URL}/user/${userId}`)
 
       if (!response.ok) {
         const errorData = await response.json()
@@ -81,7 +45,7 @@ class OrderService {
 
   async getOrderById(orderId: number): Promise<Order> {
     try {
-      const response = await fetch(`${this.baseUrl}/${orderId}`)
+      const response = await fetch(`${API_BASE_URL}/${orderId}`)
 
       if (!response.ok) {
         const errorData = await response.json()
