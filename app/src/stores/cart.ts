@@ -43,7 +43,6 @@ export const useCartStore = defineStore('cart', {
       this.updateTotals()
     },
 
-    // Méthode pour supprimer complètement un article (optionnelle)
     removeItemCompletely(burgerId: number) {
       this.items = this.items.filter((i) => i.burger.id !== burgerId)
       this.updateTotals()
@@ -60,6 +59,7 @@ export const useCartStore = defineStore('cart', {
 
     removeItems() {
       this.items = []
+      this.updateTotals()
     },
   },
 })

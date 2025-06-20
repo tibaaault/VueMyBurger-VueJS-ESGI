@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCartStore } from '@/stores/cart'
 import type { Burger } from '@/types/Burger'
-import { computed, ref } from 'vue';
+import { computed, ref } from 'vue'
 import OrderModal from './OrderModal.vue'
 
 const cartStore = useCartStore()
@@ -23,8 +23,11 @@ const openOrderModal = () => {
   showOrderModal.value = true
 }
 
-const handleOrderCreated = (order: any) => {
-  close()
+const handleOrderCreated = (order: any) => {@@
+  setTimeout(() => {
+    showOrderModal.value = false
+    close()
+  }, 2000)
 }
 </script>
 
@@ -97,9 +100,6 @@ const handleOrderCreated = (order: any) => {
       </div>
     </div>
   </transition>
-  
-  <OrderModal 
-    v-model:open="showOrderModal" 
-    @order-created="handleOrderCreated"
-  />
+
+  <OrderModal v-model:open="showOrderModal" @order-created="handleOrderCreated" />
 </template>

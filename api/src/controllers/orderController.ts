@@ -52,7 +52,7 @@ export const createOrder = async (
       data: {
         userId,
         address,
-        totalPrice: Math.round(totalPrice * 100) / 100, // Arrondir à 2 décimales
+        totalPrice: Math.round(totalPrice * 100) / 100, 
         items: {
           create: orderItems,
         },

@@ -5,7 +5,7 @@ const API_BASE_URL = 'http://localhost:3000/api/burgers'
 
 
 export class BurgerService {
-  // Récupérer tous les burgers
+
   static async getAllBurgers(): Promise<Burger[]> {
     try {
       const response = await fetch(`${API_BASE_URL}/all`)

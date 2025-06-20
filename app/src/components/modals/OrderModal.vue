@@ -61,6 +61,7 @@ const handleOrder = async () => {
     success.value = true
 
     cartStore.removeItems()
+
     emit('order-created', response.order)
     setTimeout(() => {
       emit('update:open', false)
@@ -150,7 +151,7 @@ const closeModal = () => {
       </form>
     </div>
 
-    <!-- Message de succès -->
+
     <div v-else class="text-center py-8">
       <div class="text-green-600 text-6xl mb-4">✓</div>
       <h2 class="text-2xl font-semibold text-green-600 mb-2">Commande confirmée !</h2>
