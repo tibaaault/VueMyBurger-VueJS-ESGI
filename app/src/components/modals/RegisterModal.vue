@@ -2,6 +2,7 @@
     import { ref } from 'vue'
     import BaseModal from '../ui/BaseModal.vue'
     import { useRouter } from 'vue-router'
+    import { register } from '@/services/authService'
 
     defineProps<{ open: boolean }>()
     const emit = defineEmits(['update:open'])
@@ -42,21 +43,15 @@
       loading.value = true
 
       try {
-        await fetch('http://localhost:3000/api/auth/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: username.value,
-            email: email.value,
-            password: password.value
-          })
-        }).then(res => res.json())
+        await register({
+          username: username.value,
+          email: email.value,
+          password: password.value
+        })
 
         emit('update:open', false)
       } catch (err: any) {
-        error.value = err?.response?.data?.message || "Une erreur est survenue."
+        error.value = err.message || "Une erreur est survenue."
       } finally {
         loading.value = false
       }

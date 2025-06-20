@@ -1,13 +1,18 @@
 <script setup lang="ts">
   import BurgerCard from '@/components/BurgerCard.vue'
-  import { onMounted } from 'vue'
-  import { useBurgers } from '@/services/burgerService'
+  import { onMounted, ref } from 'vue'
+  import { getAllBurgers } from '@/services/burgerService'
+  import type { Burger } from '@/types/Burger' // Make sure this path matches your project
 
-  const { burgers, loading, error, loadBurgers } = useBurgers()
+  const burgers = ref<Burger[]>([])
 
-  onMounted(() => {
-    loadBurgers()
-})
+  onMounted(async () => {
+    try {
+      burgers.value = await getAllBurgers()
+    } catch (error) {
+      console.error('Erreur lors de la récupération des burgers:', error)
+    }
+  })
 </script>
 
 <template>
@@ -18,9 +23,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div v-if="loading">Chargement...</div>
-      <div v-else-if="error">Erreur: {{ error }}</div>
-      <BurgerCard v-else v-for="burger in burgers" :key="burger.id" v-bind="burger" />
+      <BurgerCard v-for="burger in burgers" :key="burger.id" v-bind="burger" />
     </div>
   </div>
 </template>

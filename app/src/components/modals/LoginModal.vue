@@ -3,6 +3,7 @@
     import BaseModal from '../ui/BaseModal.vue'
     import { useRouter } from 'vue-router'
     import { useUserStore } from '@/stores/user'
+    import { login } from '@/services/authService'
 
     defineProps<{ open: boolean }>()
     const emit = defineEmits(['update:open'])
@@ -21,6 +22,7 @@
             return false
         }
         if (!password.value) {
+            error.value = 'Mot de passe requis.'
             return false
         }
 
@@ -34,23 +36,17 @@
         loading.value = true
 
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: email.value,
-                    password: password.value
-                })
-            }).then(res => res.json())
+            const response = await login({
+                email: email.value,
+                password: password.value
+            })
 
             userStore.setUser(response.user)
-            //userStore.setToken(response.data.token)
+            // userStore.setToken(response.token)
             
             emit('update:open', false)
         } catch (err: any) {
-            error.value = err?.response?.data?.message || "Une erreur est survenue."
+            error.value = err.message || "Une erreur est survenue."
         } finally {
             loading.value = false
         }
