@@ -1,165 +1,160 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue'
-  import { useCartStore } from '@/stores/cart'
-  import type { Burger } from '@/types/Burger'
-  import type { Ingredient } from '@/types/Ingredient'
+import { ref, computed } from 'vue'
+import { useCartStore } from '@/stores/cart'
+import type { Burger } from '@/types/Burger'
+import type { Ingredient } from '@/types/Ingredient'
 
+// ingrédients
+const availableIngredients: Ingredient[] = [
+  { id: 'bun-top', name: 'Pain du haut', color: '#D2B48C', price: 0, category: 'bun' },
+  { id: 'bun-bottom', name: 'Pain du bas', color: '#DEB887', price: 0, category: 'bun' },
 
-  // ingrédients
-  const availableIngredients: Ingredient[] = [
-    { id: 'bun-top', name: 'Pain du haut', color: '#D2B48C', price: 0, category: 'bun' },
-    { id: 'bun-bottom', name: 'Pain du bas', color: '#DEB887', price: 0, category: 'bun' },
+  { id: 'beef', name: 'Steak de bœuf', color: '#8B4513', price: 3.5, category: 'meat' },
+  { id: 'chicken', name: 'Poulet grillé', color: '#F4A460', price: 3.0, category: 'meat' },
+  { id: 'fish', name: 'Poisson pané', color: '#FFE4B5', price: 3.8, category: 'meat' },
 
-    { id: 'beef', name: 'Steak de bœuf', color: '#8B4513', price: 3.5, category: 'meat' },
-    { id: 'chicken', name: 'Poulet grillé', color: '#F4A460', price: 3.0, category: 'meat' },
-    { id: 'fish', name: 'Poisson pané', color: '#FFE4B5', price: 3.8, category: 'meat' },
+  { id: 'lettuce', name: 'Salade', color: '#90EE90', price: 0.5, category: 'vegetable' },
+  { id: 'tomato', name: 'Tomate', color: '#FF6347', price: 0.6, category: 'vegetable' },
+  { id: 'onion', name: 'Oignon', color: '#F5F5DC', price: 0.4, category: 'vegetable' },
+  { id: 'pickle', name: 'Cornichon', color: '#6B8E23', price: 0.3, category: 'vegetable' },
 
-    { id: 'lettuce', name: 'Salade', color: '#90EE90', price: 0.5, category: 'vegetable' },
-    { id: 'tomato', name: 'Tomate', color: '#FF6347', price: 0.6, category: 'vegetable' },
-    { id: 'onion', name: 'Oignon', color: '#F5F5DC', price: 0.4, category: 'vegetable' },
-    { id: 'pickle', name: 'Cornichon', color: '#6B8E23', price: 0.3, category: 'vegetable' },
+  { id: 'cheddar', name: 'Cheddar', color: '#FFA500', price: 1.2, category: 'cheese' },
+  { id: 'swiss', name: 'Gruyère', color: '#FFFF99', price: 1.5, category: 'cheese' },
 
-    { id: 'cheddar', name: 'Cheddar', color: '#FFA500', price: 1.2, category: 'cheese' },
-    { id: 'swiss', name: 'Gruyère', color: '#FFFF99', price: 1.5, category: 'cheese' },
+  { id: 'ketchup', name: 'Ketchup', color: '#DC143C', price: 0.2, category: 'sauce' },
+  { id: 'mayo', name: 'Mayonnaise', color: '#FFFACD', price: 0.2, category: 'sauce' },
+  { id: 'mustard', name: 'Moutarde', color: '#FFDB58', price: 0.2, category: 'sauce' },
+]
 
-    { id: 'ketchup', name: 'Ketchup', color: '#DC143C', price: 0.2, category: 'sauce' },
-    { id: 'mayo', name: 'Mayonnaise', color: '#FFFACD', price: 0.2, category: 'sauce' },
-    { id: 'mustard', name: 'Moutarde', color: '#FFDB58', price: 0.2, category: 'sauce' },
-  ]
+const burgerIngredients = ref<Ingredient[]>([])
+const burgerName = ref('')
+const cartStore = useCartStore()
 
-  const burgerIngredients = ref<Ingredient[]>([])
-  const burgerName = ref('')
-  const cartStore = useCartStore()
+const basePrice = 4.0
 
-  const basePrice = 4.0
+const maxIngredients = 10
+// prix
+const totalPrice = computed(() => {
+  const ingredientsPrice = burgerIngredients.value.reduce(
+    (sum, ingredient) => sum + ingredient.price,
+    0,
+  )
+  return basePrice + ingredientsPrice
+})
 
-  const maxIngredients = 10
-  // prix
-  const totalPrice = computed(() => {
-    const ingredientsPrice = burgerIngredients.value.reduce(
-      (sum, ingredient) => sum + ingredient.price,
-      0,
-    )
-    return basePrice + ingredientsPrice
-  })
+// Vérifier si on peut ajouter des ingrédients
+const canAddIngredients = computed(() => {
+  return burgerIngredients.value.length < maxIngredients
+})
 
-  // Vérifier si on peut ajouter des ingrédients
-  const canAddIngredients = computed(() => {
-    return burgerIngredients.value.length < maxIngredients
-  })
+const handleIngredientClick = (ingredient: Ingredient) => {
+  if (canAddIngredients.value) {
+    addIngredient(ingredient)
+  }
+}
+const ingredientsByCategory = computed(() => {
+  const categories = {
+    bun: availableIngredients.filter((i) => i.category === 'bun'),
+    meat: availableIngredients.filter((i) => i.category === 'meat'),
+    cheese: availableIngredients.filter((i) => i.category === 'cheese'),
+    vegetable: availableIngredients.filter((i) => i.category === 'vegetable'),
+    sauce: availableIngredients.filter((i) => i.category === 'sauce'),
+  }
+  return categories
+})
 
-  const handleIngredientClick = (ingredient: Ingredient) => {
-    if (canAddIngredients.value) {
-      addIngredient(ingredient)
+// ajouter un ingrédient + limiter à 10
+const addIngredient = (ingredient: Ingredient) => {
+  if (burgerIngredients.value.length === 0 && ingredient.id !== 'bun-bottom') {
+    const bottomBun = availableIngredients.find((i) => i.id === 'bun-bottom')
+    if (bottomBun) {
+      burgerIngredients.value.push({ ...bottomBun })
     }
   }
-  const ingredientsByCategory = computed(() => {
-    const categories = {
-      bun: availableIngredients.filter((i) => i.category === 'bun'),
-      meat: availableIngredients.filter((i) => i.category === 'meat'),
-      cheese: availableIngredients.filter((i) => i.category === 'cheese'),
-      vegetable: availableIngredients.filter((i) => i.category === 'vegetable'),
-      sauce: availableIngredients.filter((i) => i.category === 'sauce'),
+  if (ingredient.category === 'bun') {
+    const existingBun = burgerIngredients.value.find((i) => i.id === ingredient.id)
+    if (existingBun) return // pain existe dejà
+
+    // supp l'autre pain
+    if (ingredient.id === 'bun-top') {
+      burgerIngredients.value = burgerIngredients.value.filter((i) => i.id !== 'bun-top')
+    } else if (ingredient.id === 'bun-bottom') {
+      burgerIngredients.value = burgerIngredients.value.filter((i) => i.id !== 'bun-bottom')
     }
-    return categories
-  })
+  }
 
-  // ajouter un ingrédient + limiter à 10
-  const addIngredient = (ingredient: Ingredient) => {
+  burgerIngredients.value.push({ ...ingredient })
+  organizeIngredients()
+}
 
+// supp un ingrédient
+const removeIngredient = (index: number) => {
+  burgerIngredients.value.splice(index, 1)
+  organizeIngredients()
+}
 
-    if (burgerIngredients.value.length === 0 && ingredient.id !== 'bun-bottom') {
-      const bottomBun = availableIngredients.find((i) => i.id === 'bun-bottom')
-      if (bottomBun) {
-        burgerIngredients.value.push({ ...bottomBun })
+// organiser les ingrédients
+const organizeIngredients = () => {
+  burgerIngredients.value.sort((a, b) => {
+    const getOrderPriority = (ingredient: Ingredient) => {
+      if (ingredient.id === 'bun-bottom') return 1000
+      if (ingredient.id === 'bun-top') return 0
+
+      switch (ingredient.category) {
+        case 'cheese':
+          return 100
+        case 'meat':
+          return 200
+        case 'sauce':
+          return 300
+        case 'vegetable':
+          if (ingredient.id === 'lettuce') return 50
+          if (ingredient.id === 'tomato') return 60
+          if (ingredient.id === 'onion') return 70
+          if (ingredient.id === 'pickle') return 80
+          return 400
+        default:
+          return 500
       }
     }
-    if (ingredient.category === 'bun') {
-      const existingBun = burgerIngredients.value.find((i) => i.id === ingredient.id)
-      if (existingBun) return // pain existe dejà
 
-      // supp l'autre pain
-      if (ingredient.id === 'bun-top') {
-        burgerIngredients.value = burgerIngredients.value.filter((i) => i.id !== 'bun-top')
-      } else if (ingredient.id === 'bun-bottom') {
-        burgerIngredients.value = burgerIngredients.value.filter((i) => i.id !== 'bun-bottom')
-      }
-    }
+    return getOrderPriority(a) - getOrderPriority(b)
+  })
+}
 
-    burgerIngredients.value.push({ ...ingredient })
-    organizeIngredients()
+const resetBurger = () => {
+  burgerIngredients.value = []
+  burgerName.value = ''
+}
+
+const saveBurger = () => {
+  // nom automatique
+  let finalName = burgerName.value.trim()
+  if (!finalName) {
+    const ingredients = burgerIngredients.value
+    const meats = ingredients.filter((i) => i.category === 'meat')
+    const mainIngredient = meats.length > 0 ? meats[0].name : 'Burger'
+    finalName = `${mainIngredient} Personnalisé`
   }
 
-  // supp un ingrédient
-  const removeIngredient = (index: number) => {
-    burgerIngredients.value.splice(index, 1)
-    organizeIngredients()
+  const customBurger: Burger = {
+    id: Date.now(), //id d'un burger personnalisé pour l'ajout plus tard
+    name: finalName,
+    description: `Burger personnalisé avec: ${burgerIngredients.value.map((i) => i.name).join(', ')}`,
+    price: totalPrice.value,
+    imageUrl: '/burger.png',
+    ingredients: burgerIngredients.value.map((i) => i.name),
   }
 
-  // organiser les ingrédients 
-  const organizeIngredients = () => {
-    burgerIngredients.value.sort((a, b) => {
-      const getOrderPriority = (ingredient: Ingredient) => {
-        if (ingredient.id === 'bun-bottom') return 1000
-        if (ingredient.id === 'bun-top') return 0
+  cartStore.addItem({
+    burger: customBurger,
+    quantity: 1,
+  })
+  closeBuilder()
+}
 
-        switch (ingredient.category) {
-          case 'cheese':
-            return 100
-          case 'meat':
-            return 200
-          case 'sauce':
-            return 300
-          case 'vegetable':
-            if (ingredient.id === 'lettuce') return 50
-            if (ingredient.id === 'tomato') return 60
-            if (ingredient.id === 'onion') return 70
-            if (ingredient.id === 'pickle') return 80
-            return 400
-          default:
-            return 500
-        }
-      }
-
-      return getOrderPriority(a) - getOrderPriority(b)
-    })
-  }
-
-
-  const resetBurger = () => {
-    burgerIngredients.value = []
-    burgerName.value = ''
-  }
-
-  const saveBurger = () => {
-    // nom automatique
-    let finalName = burgerName.value.trim()
-    if (!finalName) {
-      const ingredients = burgerIngredients.value
-      const meats = ingredients.filter((i) => i.category === 'meat')
-      const mainIngredient = meats.length > 0 ? meats[0].name : 'Burger'
-      finalName = `${mainIngredient} Personnalisé`
-    }
-
-
-    const customBurger: Burger = {
-      id: Date.now(), //id d'un burger personnalisé pour l'ajout plus tard
-      name: finalName,
-      description: `Burger personnalisé avec: ${burgerIngredients.value.map((i) => i.name).join(', ')}`,
-      price: totalPrice.value,
-      img: '/burger.png', 
-      ingredients: burgerIngredients.value.map((i) => i.name),
-    }
-
-    cartStore.addItem({
-      burger: customBurger,
-      quantity: 1,
-    })
-    closeBuilder()
-  }
-
-  const emit = defineEmits(['close'])
-  const closeBuilder = () => emit('close')
+const emit = defineEmits(['close'])
+const closeBuilder = () => emit('close')
 </script>
 
 <template>
@@ -250,7 +245,6 @@
           <div class="mb-6">
             <h4 class="font-medium mb-2 text-yellow-700 flex items-center justify-between">
               <span>🍞 Pains</span>
-              
             </h4>
             <div class="grid grid-cols-2 gap-2">
               <div
