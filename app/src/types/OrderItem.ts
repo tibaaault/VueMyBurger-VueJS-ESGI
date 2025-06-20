@@ -1,4 +1,5 @@
 import type { Burger } from './Burger'
+import type { Burger } from './Burger';
 
 export interface OrderItem {
   id: number
