@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 
-import burgersRoutes from "./routes/burgers";
+import burgersRoutes from "./routes/burger";
 import authRoutes from "./routes/auth";
 import orderRoutes from "./routes/order";
 

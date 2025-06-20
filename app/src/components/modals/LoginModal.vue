@@ -1,7 +1,6 @@
 <script setup lang="ts">
     import { ref } from 'vue'
     import BaseModal from './BaseModal.vue'
-    import axios from 'axios'
     import { useRouter } from 'vue-router'
     import { useUserStore } from '@/stores/user'
 
@@ -35,13 +34,19 @@
         loading.value = true
 
         try {
-            const response = await axios.post('http://localhost:3000/api/auth/login', {
-                email: email.value,
-                password: password.value
-            })
+            const response = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email.value,
+                    password: password.value
+                })
+            }).then(res => res.json())
 
-            userStore.setUser(response.data.user)
-            userStore.setToken(response.data.token)
+            userStore.setUser(response.user)
+            //userStore.setToken(response.data.token)
             
             emit('update:open', false)
         } catch (err: any) {

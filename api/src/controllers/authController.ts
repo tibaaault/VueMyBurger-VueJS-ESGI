@@ -2,15 +2,6 @@ import { Request, Response } from 'express';
 import { User } from '../types/User';
 import bcrypt from 'bcrypt';
 import prisma from '../prisma/client';
-import jwt from 'jsonwebtoken';
-
-const generateToken = (username: string): string => {
-    if (!process.env.JWT_SECRET) {
-        throw new Error('JWT_SECRET is not defined in environment variables');
-    }
-
-    return jwt.sign(username, process.env.JWT_SECRET);
-}
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
     const { username, email, password } = req.body as User;
@@ -40,9 +31,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
             }
         });
 
-        const token = generateToken(username);
-
-        res.status(201).json({ message: 'Votre compte a été créé avec succès !', user: { id: newUser.id, email: newUser.email, username: newUser.username }, token });
+        res.status(201).json({ message: 'Votre compte a été créé avec succès !', user: { id: newUser.id, email: newUser.email, username: newUser.username } });
     } catch (error) {
         console.error('Erreur lors de la création de l\'utilisateur:', error);
         res.status(500).json({ message: 'Erreur serveur lors de la création du compte.' });
@@ -74,9 +63,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
-        const token = generateToken(user.username);
-
-        res.status(200).json({ message: 'Connexion réussie !', user: { id: user.id, email: user.email, username: user.username }, token });
+        res.status(200).json({ message: 'Connexion réussie !', user: { id: user.id, email: user.email, username: user.username } });
     } catch (error) {
         console.error('Erreur lors de la connexion:', error);
         res.status(500).json({ message: 'Erreur serveur lors de la connexion.' });

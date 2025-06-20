@@ -7,19 +7,4 @@ export interface Burger {
   ingredients: string[];
 }
 
-export interface CreateBurgerDto {
-  name: string;
-  description: string;
-  price: number;
-  img?: string;
-  ingredients: string[];
-  // category:
-  //   | "classic"
-  //   | "cheese"
-  //   | "premium"
-  //   | "vegetarian"
-  //   | "spicy"
-  //   | "gourmet";
-}
-
 

@@ -43,11 +43,17 @@
       loading.value = true
 
       try {
-        await axios.post('http://localhost:3000/api/auth/register', {
-          username: username.value,
-          email: email.value,
-          password: password.value
-        })
+        await fetch('http://localhost:3000/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username.value,
+            email: email.value,
+            password: password.value
+          })
+        }).then(res => res.json())
 
         emit('update:open', false)
       } catch (err: any) {
