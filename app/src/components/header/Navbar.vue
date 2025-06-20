@@ -81,13 +81,13 @@
           <div v-else class="flex flex-row">
             <button
               @click="showLoginModal = true"
-              class=" bg-green-600 text-white px-1 md:px-4 md:py-2 rounded hover:bg-green-700 transition"
+              class=" bg-red-600 text-white px-1 md:px-4 md:py-2 rounded hover:bg-green-700 transition"
             >
               Se connecter
             </button>
             <button
               @click="showRegisterModal = true"
-              class="bg-green-600 text-white px-1 md:px-4 md:py-2 rounded hover:bg-green-700 transition mx-2"
+              class="bg-red-600 text-white px-1 md:px-4 md:py-2 rounded hover:bg-green-700 transition mx-2"
             >
               S'inscrire
             </button>
