@@ -1,7 +1,6 @@
 <script setup lang="ts">
     import { ref } from 'vue'
-    import BaseModal from './BaseModal.vue'
-    import axios from 'axios'
+    import BaseModal from '../ui/BaseModal.vue'
     import { useRouter } from 'vue-router'
 
     defineProps<{ open: boolean }>()
