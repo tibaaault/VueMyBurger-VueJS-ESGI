@@ -23,7 +23,7 @@ const openOrderModal = () => {
   showOrderModal.value = true
 }
 
-const handleOrderCreated = (order: any) => {@@
+const handleOrderCreated = (order: any) => {
   setTimeout(() => {
     showOrderModal.value = false
     close()
