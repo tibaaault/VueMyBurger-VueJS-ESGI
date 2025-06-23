@@ -42,7 +42,13 @@
 <details>
   <summary><strong>➡️ View</strong></summary>
   <br/>
-  <img src="previews/home.png" width="280" target="_blank"/>
+  <img align="left" src="previews/navbar_hero.png" width="280" target="_blank"/>
+  <img src="previews/menu.png" width="280" target="_blank"/>
+  <br/>
+  <img align="left" src="previews/contact_about.png" width="280" target="_blank"/>
+  <img src="previews/create_burger.png" width="280" target="_blank"/>
+  <br/>
+  <img src="previews/history.png" width="280" target="_blank"/>
 </details>
 
 ## Feedback
